@@ -2,4 +2,4 @@ DBURI = "postgres://yscpfqkikwaonb:77999dddcf3de3e60edabe01426c4b885b9b962644f63
 SQLITEDB = False
 SECRET_KEY = "secret key"
 JWT_EXPIRATION_DELTA = 14
-ENV = "DEVELOPMENT"
+ENV = "PRODUCTION"
