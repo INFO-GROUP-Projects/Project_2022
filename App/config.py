@@ -3,4 +3,4 @@ SQLITEDB = False
 SQLALCHEMY_DATABASE_URI = "sqlite:///temp-database.db"
 SECRET_KEY = "secret key"
 JWT_EXPIRATION_DELTA = 14
-ENV = "production"
+ENV = "PRODUCTION"
