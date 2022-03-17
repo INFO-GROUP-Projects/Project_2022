@@ -58,5 +58,15 @@ def create_app(config={}):
     app.app_context().push()
     return app
 
+
 app = create_app()
+
+@app.route('/api/users', methods = ['GET'])
+def getAllUsers():
+    u = User.query.all()
+    if u is None:
+        return []
+    uList = [us.toDict() for us in u]
+    return json.dumps(uList)
+    
 migrate = get_migrate(app)
