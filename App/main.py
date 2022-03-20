@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask
+from flask import Flask, jsonify
 from flask_login import LoginManager, current_user
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
 from flask_cors import CORS
@@ -68,13 +68,14 @@ def getAllUsers():
     if u is None:
         return []
     uList = [us.toDict() for us in u]
-    return json.dumps(uList)
+    return jsonify(uList)
 
 @app.route('/getWords/' , methods = {'GET'})
 def getWords():
     with open("App/static/3-letter-words.json", "r") as File: 
         jsonData = json.load(File)
-        return json.dump(jsonData[3])
+        jsonList = [jsonData[3]]
+        return jsonify(jsonList)
     return []
     
 migrate = get_migrate(app)
