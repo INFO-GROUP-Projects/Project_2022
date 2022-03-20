@@ -74,18 +74,11 @@ def getAllUsers():
 @app.route('/api/getWordsEasy/' , methods = {'GET'})
 def getWords():
     jsonList = {}
-    jsonRandom = {}
     with open("App/static/3-letter-words.json", "r") as File: 
         jsonData = json.load(File)
         for i in range (10):
             index = random(0, len(jsonData))
-            if jsonRandom[index] is None:
-                jsonRandom[index] = jsonData[index]
-                jsonList[i] = jsonData[index]
-            else:
-                index = random(0,len(jsonData))
-                jsonRandom[index] = jsonData[index]
-                jsonList[i] = jsonData[index]
+            jsonList[i] = jsonData[index]
         return jsonify(jsonList)
 
     
