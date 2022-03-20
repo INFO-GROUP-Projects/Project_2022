@@ -74,12 +74,19 @@ def getAllUsers():
 @app.route('/api/getWordsEasy/' , methods = {'GET'})
 def getWords():
     jsonList = {}
-    with open("App/static/3-letter-words.json", "r") as File: 
+    with open("App/static/4-letter-words.json", "r") as File: 
         jsonData = json.load(File)
         for i in range (10):
-            index = random(0, len(jsonData))
-            jsonList[i] = jsonData[index]
+            index = random.randrange(0, len(jsonData))
+            if jsonRandom[index] is None:
+                jsonRandom[index] = jsonData[index]
+                jsonList[i] = jsonData[index]
+            else:
+                index = random.randrange(0,len(jsonData))
+                jsonRandom[index] = jsonData[index]
+                jsonList[i] = jsonData[index]
         return jsonify(jsonList)
+    return []
 
     
 migrate = get_migrate(app)
