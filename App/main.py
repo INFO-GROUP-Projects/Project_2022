@@ -78,7 +78,7 @@ def getWords():
     with open("App/static/3-letter-words.json", "r") as File: 
         jsonData = json.load(File)
         for i in range (10):
-            index = random(0,len(jsonData))
+            index = random(0, jsonData.size())
             if jsonRandom[index] is None:
                 jsonRandom[index] = jsonData[index]
                 jsonList[i] = jsonData[index]
