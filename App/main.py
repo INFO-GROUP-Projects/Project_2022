@@ -1,7 +1,6 @@
 import os
 import json
 import random
-from turtle import goto 
 from flask import Flask, jsonify
 from flask_login import LoginManager, current_user
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
