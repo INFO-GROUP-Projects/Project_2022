@@ -1,4 +1,5 @@
 import os
+import json
 from flask import Flask
 from flask_login import LoginManager, current_user
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
@@ -68,5 +69,12 @@ def getAllUsers():
         return []
     uList = [us.toDict() for us in u]
     return json.dumps(uList)
+
+@app.route('/getWords/' , methods = {'GET'})
+def getWords(difficulity):
+    with open("/static/3-letter-words.json", "r") as File: 
+        jsonData = json.load(File)
+        return json.dump(jsonData[3])
+    return []
     
 migrate = get_migrate(app)
