@@ -1,5 +1,7 @@
 import os
 import json
+import random
+from turtle import goto 
 from flask import Flask, jsonify
 from flask_login import LoginManager, current_user
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
@@ -70,12 +72,22 @@ def getAllUsers():
     uList = [us.toDict() for us in u]
     return jsonify(uList)
 
-@app.route('/getWords/' , methods = {'GET'})
+@app.route('/getWordsEasy/' , methods = {'GET'})
 def getWords():
+    jsonList = {}
+    jsonRandom = {}
     with open("App/static/3-letter-words.json", "r") as File: 
         jsonData = json.load(File)
-        jsonList = [jsonData[3]]
+        for i in range (10):
+            index = random(0,len(jsonData))
+            if jsonRandom[index] is None:
+                jsonRandom[index] = jsonData[index]
+                jsonList[i] = jsonData[index]
+            else:
+                index = random(0,len(jsonData))
+                jsonRandom[index] = jsonData[index]
+                jsonList[i] = jsonData[index]
         return jsonify(jsonList)
-    return []
+
     
 migrate = get_migrate(app)
