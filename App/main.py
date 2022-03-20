@@ -71,14 +71,14 @@ def getAllUsers():
     uList = [us.toDict() for us in u]
     return jsonify(uList)
 
-@app.route('/getWordsEasy/' , methods = {'GET'})
+@app.route('/api/getWordsEasy/' , methods = {'GET'})
 def getWords():
     jsonList = {}
     jsonRandom = {}
     with open("App/static/3-letter-words.json", "r") as File: 
         jsonData = json.load(File)
         for i in range (10):
-            index = random(0, jsonData.size())
+            index = random(0, len(jsonData))
             if jsonRandom[index] is None:
                 jsonRandom[index] = jsonData[index]
                 jsonList[i] = jsonData[index]
