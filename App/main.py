@@ -71,7 +71,7 @@ def getAllUsers():
     return json.dumps(uList)
 
 @app.route('/getWords/' , methods = {'GET'})
-def getWords(difficulity):
+def getWords():
     with open("/static/3-letter-words.json", "r") as File: 
         jsonData = json.load(File)
         return json.dump(jsonData[3])
