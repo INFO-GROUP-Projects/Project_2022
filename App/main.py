@@ -74,16 +74,14 @@ def getAllUsers():
 @app.route('/api/getWordsSingular/<id>', methods = {'GET'})
 def getWordsSingular(id):
     jsonList = {}
-    returnList = []
     if int(id) < 2 or int(id) > 15:
         return "Invalid"
     with open("App/static/"+id+"-letter-words.json", "r") as File: 
         jsonData = json.load(File)
-        while len(jsonList) <= 10:
+        while len(jsonList) < 10:
             index = random.randrange(0, len(jsonData))
-            jsonList.add(jsonData[index]["word"])
-        returnList = [jsonList]  
-        return jsonify(jsonList)
+            jsonList[jsonData[index]["word"]] = 1
+        return jsonify(list(jsonList.keys()))
     return []
 
 @app.route('/api/getWordsIncrements/<id>' , methods = {'GET'})
@@ -96,23 +94,22 @@ def getWordsIncrement(id):
     
     with open("App/static/"+str(letIndex)+"-letter-words.json", "r") as File: 
         jsonData = json.load(File)
-        for i in range (3):
+        while len(jsonList) < 3:
             index = random.randrange(0, len(jsonData))
-            jsonList[i] = jsonData[index]
+            jsonList[jsonData[index]["word"]] = 1
     letIndex += 1
     with open("App/static/"+str(letIndex)+"-letter-words.json", "r") as File: 
         jsonData = json.load(File)
-        for i in range (3,6):
+        while len(jsonList) < 6:
             index = random.randrange(0, len(jsonData))
-            jsonList[i] = jsonData[index]
+            jsonList[jsonData[index]["word"]] = 1
     letIndex += 1
     with open("App/static/"+str(letIndex)+"-letter-words.json", "r") as File: 
         jsonData = json.load(File)
-        for i in range (6,10):
+        while len(jsonList) < 10:
             index = random.randrange(0, len(jsonData))
-            jsonList[i] = jsonData[index]
-        
-        return jsonify(jsonList)
+            jsonList[jsonData[index]["word"]] = 1
+        return jsonify(list(jsonList.keys()))
     return []
 
     
