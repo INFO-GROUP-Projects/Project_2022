@@ -80,7 +80,7 @@ def getWordsSingular(id):
         jsonData = json.load(File)
         while len(jsonList) <= 10:
             index = random.randrange(0, len(jsonData))
-            jsonList.add(jsonData[index])    
+            jsonList.add(jsonData[index]["word"])    
         return jsonify(jsonList)
     return []
 
