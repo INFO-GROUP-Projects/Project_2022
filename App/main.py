@@ -73,7 +73,7 @@ def getAllUsers():
 
 @app.route('/api/getWordsSingular/<id>', methods = {'GET'})
 def getWordsSingular(id):
-    jsonList = {}
+    jsonList = set()
     if int(id) < 2 or int(id) > 15:
         return "Invalid"
     with open("App/static/"+id+"-letter-words.json", "r") as File: 
