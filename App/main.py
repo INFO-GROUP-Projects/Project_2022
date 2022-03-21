@@ -82,7 +82,7 @@ def getWordsSingular(id):
         i = 0
         while len(jsonList) <= 10:
             index = random.randrange(0, len(jsonData))
-            if jsonRandom[index] == "" :
+            if jsonRandom[index] is None :
                 jsonList[i] = jsonData[index]
                 jsonRandom[index] = "true"
                 i+= 1     
