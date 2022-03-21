@@ -76,15 +76,22 @@ def getWords():
     jsonList = {}
     with open("App/static/4-letter-words.json", "r") as File: 
         jsonData = json.load(File)
-        for i in range (10):
+        for i in range (3):
             index = random.randrange(0, len(jsonData))
-            if jsonRandom[index] is None:
-                jsonRandom[index] = jsonData[index]
-                jsonList[i] = jsonData[index]
-            else:
-                index = random.randrange(0,len(jsonData))
-                jsonRandom[index] = jsonData[index]
-                jsonList[i] = jsonData[index]
+            jsonList[i] = jsonData[index]
+        
+    with open("App/static/5-letter-words.json", "r") as File: 
+        jsonData = json.load(File)
+        for i in range (3,6):
+            index = random.randrange(0, len(jsonData))
+            jsonList[i] = jsonData[index]
+
+    with open("App/static/6-letter-words.json", "r") as File: 
+        jsonData = json.load(File)
+        for i in range (6,10):
+            index = random.randrange(0, len(jsonData))
+            jsonList[i] = jsonData[index]
+        
         return jsonify(jsonList)
     return []
 
