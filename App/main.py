@@ -74,6 +74,8 @@ def getAllUsers():
 @app.route('/api/getWordsSingular/<id>', methods = {'GET'})
 def getWordsSingular(id):
     jsonList = {}
+    if int(id) < 2 or int(id) > 15:
+        return "Invalid"
     with open("App/static/"+id+"-letter-words.json", "r") as File: 
         jsonData = json.load(File)
         for i in range (10):
@@ -86,6 +88,10 @@ def getWordsSingular(id):
 def getWordsIncrement(id):
     jsonList = {}
     letIndex = int(id)
+
+    if int(id) < 2 or int(id) < 12:
+        return "Invalid"
+    
     with open("App/static/"+str(letIndex)+"-letter-words.json", "r") as File: 
         jsonData = json.load(File)
         for i in range (3):
