@@ -89,7 +89,7 @@ def getWordsIncrement(id):
     jsonList = {}
     letIndex = int(id)
 
-    if int(id) < 2 or int(id) < 12:
+    if int(id) < 2 or int(id) > 12:
         return "Invalid"
     
     with open("App/static/"+str(letIndex)+"-letter-words.json", "r") as File: 
