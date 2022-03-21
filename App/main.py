@@ -74,18 +74,13 @@ def getAllUsers():
 @app.route('/api/getWordsSingular/<id>', methods = {'GET'})
 def getWordsSingular(id):
     jsonList = {}
-    jsonRandom = {}
     if int(id) < 2 or int(id) > 15:
         return "Invalid"
     with open("App/static/"+id+"-letter-words.json", "r") as File: 
         jsonData = json.load(File)
-        i = 0
         while len(jsonList) <= 10:
             index = random.randrange(0, len(jsonData))
-            if jsonRandom[index] is None :
-                jsonList[i] = jsonData[index]
-                jsonRandom[index] = "true"
-                i+= 1     
+            jsonList.add(jsonData[index])    
         return jsonify(jsonList)
     return []
 
