@@ -71,22 +71,34 @@ def getAllUsers():
     uList = [us.toDict() for us in u]
     return jsonify(uList)
 
-@app.route('/api/getWordsEasy/' , methods = {'GET'})
-def getWords():
+@app.route('/api/getWordsSingular/<id>', methods = {'GET'})
+def getWordsSingular(id):
     jsonList = {}
-    with open("App/static/4-letter-words.json", "r") as File: 
+    with open("App/static/"+id+"-letter-words.json", "r") as File: 
+        jsonData = json.load(File)
+        for i in range (10):
+            index = random.randrange(0, len(jsonData))
+            jsonList[i] = jsonData[index]      
+        return jsonify(jsonList)
+    return []
+
+@app.route('/api/getWordsIncrements/<id>' , methods = {'GET'})
+def getWordsIncrement(id):
+    jsonList = {}
+    letIndex = int(id)
+    with open("App/static/"+str(letIndex)+"-letter-words.json", "r") as File: 
         jsonData = json.load(File)
         for i in range (3):
             index = random.randrange(0, len(jsonData))
             jsonList[i] = jsonData[index]
-        
-    with open("App/static/5-letter-words.json", "r") as File: 
+    letIndex += 1
+    with open("App/static/"+str(letIndex)+"-letter-words.json", "r") as File: 
         jsonData = json.load(File)
         for i in range (3,6):
             index = random.randrange(0, len(jsonData))
             jsonList[i] = jsonData[index]
-
-    with open("App/static/6-letter-words.json", "r") as File: 
+    letIndex += 1
+    with open("App/static/"+str(letIndex)+"-letter-words.json", "r") as File: 
         jsonData = json.load(File)
         for i in range (6,10):
             index = random.randrange(0, len(jsonData))
