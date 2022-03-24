@@ -8,7 +8,7 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from datetime import timedelta
-
+from gtts import gTTS
 
 from App.database import init_db, get_migrate
 
@@ -114,3 +114,11 @@ def getWordsIncrement(id):
 
     
 migrate = get_migrate(app)
+
+#gTTS used to create audio file of word generated
+textTest = "word sound"
+language = 'en'
+
+output = gTTS(text = textTest, lang = language, slow = False)
+
+output.save("word.mp3")
