@@ -1,6 +1,5 @@
 import os
 import json
-import random
 from flask import Flask, jsonify
 from flask_login import LoginManager, current_user
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
@@ -14,6 +13,10 @@ from App.database import init_db, get_migrate
 
 from App.controllers import (
     setup_jwt
+)
+
+from App.models import (
+    wordGame
 )
 
 from App.views import (
@@ -72,45 +75,12 @@ def getAllUsers():
     return jsonify(uList)
 
 @app.route('/api/getWordsSingular/<id>', methods = {'GET'})
-def getWordsSingular(id):
-    jsonList = {}
-    if int(id) < 2 or int(id) > 15:
-        return "Invalid"
-    with open("App/static/"+id+"-letter-words.json", "r") as File: 
-        jsonData = json.load(File)
-        while len(jsonList) < 10:
-            index = random.randrange(0, len(jsonData))
-            jsonList[jsonData[index]["word"]] = 1
-        return jsonify(list(jsonList.keys()))
-    return []
+def getWordsId(id):
+    return wordGame.getWordsSingular(id)
 
-@app.route('/api/getWordsIncrements/<id>' , methods = {'GET'})
-def getWordsIncrement(id):
-    jsonList = {}
-    letIndex = int(id)
-
-    if int(id) < 2 or int(id) > 12:
-        return "Invalid"
-    
-    with open("App/static/"+str(letIndex)+"-letter-words.json", "r") as File: 
-        jsonData = json.load(File)
-        while len(jsonList) < 3:
-            index = random.randrange(0, len(jsonData))
-            jsonList[jsonData[index]["word"]] = 1
-    letIndex += 1
-    with open("App/static/"+str(letIndex)+"-letter-words.json", "r") as File: 
-        jsonData = json.load(File)
-        while len(jsonList) < 6:
-            index = random.randrange(0, len(jsonData))
-            jsonList[jsonData[index]["word"]] = 1
-    letIndex += 1
-    with open("App/static/"+str(letIndex)+"-letter-words.json", "r") as File: 
-        jsonData = json.load(File)
-        while len(jsonList) < 10:
-            index = random.randrange(0, len(jsonData))
-            jsonList[jsonData[index]["word"]] = 1
-        return jsonify(list(jsonList.keys()))
-    return []
+@app.route('/api/getWordsIncrements/' , methods = {'GET'})
+def getWordsIncrement():
+    return wordGame.getWordsMultiple()
 
     
 migrate = get_migrate(app)
