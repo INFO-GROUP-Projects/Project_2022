@@ -42,14 +42,14 @@ function populateVoiceList(){
     
     
     async function getWordsI(){
-        let response = await fetch(window.location.href +'/api/getWordsIncrements/')
-        let data = response.json()
+        let response = await fetch("https://"+window.location.host+'/api/getWordsIncrements/')
+        let data = await response.json()
         return data
     }
 
-    function wordToSpeech(){
-        data = getWordsI()
-        passWord = "Spell the word "+data.word[0];
+    async function wordToSpeech(){
+        data = await getWordsI()
+        passWord = "Spell the word     " + data[0];
         speak()
 
     }

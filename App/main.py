@@ -74,6 +74,10 @@ def getAllUsers():
     uList = [us.toDict() for us in u]
     return jsonify(uList)
 
+@app.route('/api/help')
+def get_Help():
+    return "What is going on"
+
 @app.route('/api/getWordsSingular/<id>', methods = {'GET'})
 def getWordsId(id):
     return wordGame.getWordsSingular(id)
