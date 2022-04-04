@@ -82,7 +82,6 @@ def getWordsId(id):
 def getWordsIncrement():
     return wordGame.getWordsMultiple()
 
-    
 migrate = get_migrate(app)
 
 #gTTS used to create audio file of word generated
