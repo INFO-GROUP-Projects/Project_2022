@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}Word Page{% endblock %}
+{% block page %}Word Page{% endblock %}
+
+{{ super() }}
+
+{% block content %}
+    <button onclick ="wordToSpeech('Hello')"> Click me to hear a word</button>
+    <script src ="/static/VoiceBox.js"></script>
+{% endblock %}
