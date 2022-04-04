@@ -7,5 +7,5 @@ def get_api_docs():
     return render_template('index.html')
 
 @api_views.route('/WordPage')
-def returnWordPage():
+def returnWordPage():  
   return render_template('wordPage.html')  

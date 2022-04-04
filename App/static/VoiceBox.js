@@ -39,8 +39,17 @@ function populateVoiceList(){
         utterThis.rate = 1;
         synth.speak(utterThis);
       }
+    
+    
+    async function getWordsI(){
+        let response = await fetch(window.location.href +'/api/getWordsIncrements/')
+        let data = response.json()
+        return data
+    }
 
-    function wordToSpeech(s){
-        passWord = "Spell the word "+s;
+    function wordToSpeech(){
+        data = getWordsI()
+        passWord = "Spell the word "+data.word[0];
         speak()
+
     }
