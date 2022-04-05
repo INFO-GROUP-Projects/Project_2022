@@ -5,6 +5,12 @@
 {{ super() }}
 
 {% block content %}
-    <button onclick ="wordToSpeech()"> Click me to hear a word</button>
+<body>
+    <button onclick ="wordToSpeech()"> Begin</button>
+    <div id = 'content'>
+        
+    </div>
     <script src ="/static/VoiceBox.js"></script>
+</body>
+    
 {% endblock %}
