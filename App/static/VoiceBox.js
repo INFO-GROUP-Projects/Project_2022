@@ -1,6 +1,7 @@
 var synth = window.speechSynthesis
 
 var voices = []
+var data
 var default_voice
 var passWord
 var index = 0
@@ -37,14 +38,19 @@ function populateVoiceList(){
 
         utterThis.voice = default_voice;
         utterThis.pitch = 1;
-        utterThis.rate = 1.2;
+        utterThis.rate = 0.75;
         synth.speak(utterThis);
+      }
+    
+      function updateText(index){
+        passWord = "Spell the word     " + data[index];
       }
     
     
     async function getWordsI(){
-        let response = await fetch("https://"+window.location.host+'/api/getWordsIncrements/')
-        let data = await response.json()
+        let response = await fetch("http://127.0.0.1:8080/api/getWordsIncrements/")
+            //"https://"+window.location.host+'/api/getWordsIncrements/')
+        data = await response.json()
         return data
     }
 
@@ -55,20 +61,34 @@ function populateVoiceList(){
         html += `
             <input type ="text" id ="textBox"> 
             <label for = "textBox">Spell Word </label>
+            <button onclick="speakAgain()"> Speak Slower </button>
             <button onclick="speakAgain()"> Speak </button>
-            <button onclick = "validate_Word(word)>"Submit <button>
+            <button onclick="speakAgain()"> Speak Faster </button>
+            <button onclick = "validate_Word()">Submit </button>
         `
         htmlBody.innerHTML = html
-        passWord = "Spell the word     " + data[index];
+        updateText(index)
     }
 
     function speakAgain(){
         speak()
     }
 
-    function validate_Word(text){
-        let inputField = document.querySelector('#textbox')
-        inputField.value.
+    function validate_Word(){
+        let inputField = document.querySelector('#textBox')
+        let comp = inputField.value
+
+        if(comp === data[index]){
+            //do something
+            console.log("Correct")
+            index = index + 1
+            updateText(index)
+            speakAgain()
+        }
+        else{
+            console.log("Incorrect word is " +data[index])
+            //do something else
+        }
     }
         
 
