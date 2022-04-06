@@ -80,9 +80,12 @@ function populateVoiceList(){
         if(comp === data[index]){
             //do something
             console.log("Correct")
-            index = index + 1
-            updateText(index)
-            speakAgain()
+            if(index < 9){
+                index = index + 1
+                updateText(index)
+                speakAgain()
+            }
+           
         }
         else{
             console.log("Incorrect word is " +data[index])
