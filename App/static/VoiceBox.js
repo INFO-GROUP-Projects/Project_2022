@@ -48,8 +48,7 @@ function populateVoiceList(){
     
     
     async function getWordsI(){
-        let response = await fetch("http://127.0.0.1:8080/api/getWordsIncrements/")
-            //"https://"+window.location.host+'/api/getWordsIncrements/')
+        let response = await fetch("https://"+window.location.host+'/api/getWordsIncrements/')
         data = await response.json()
         return data
     }
