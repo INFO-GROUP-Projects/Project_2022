@@ -6,7 +6,3 @@ api_views = Blueprint('api_views', __name__, template_folder='../templates')
 def get_api_docs():
     return render_template('index.html')
 
-@api_views.route('/WordPage')
-def returnWordPage():  
-  cGame = currentGame()
-  return render_template('wordPage.html', cGame = cGame)  

@@ -1,17 +1,15 @@
 #word model stores information about the model nothing else
-class Words(object):
-        def __init__(self,id, word,points,length):
+class FiveWords(object):
+        def __init__(self,id, word,points):
             self.id = id
             self.word = word
             self.points =points
-            self.length = length
 
         def to_dict(self):
             return {
                 'id':self.id,
                 'word':self.word
                 'points':self.points
-                'word length':self.word_length
             }
 #class currentGame(FlaskForm):
    # user_answer = StringField('Answer')

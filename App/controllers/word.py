@@ -1,70 +1,34 @@
 #write code to intalize the words class and retrieve words and points 
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
+
 import random
 from flask import jsonify
 from flask_wtf import FlaskForm
 from wtforms import StringField,HiddenField,SubmitField
 
-def getWordsSingular(id):
-    jsonList = {}
-    if int(id) < 3 or int(id) > 5:
-        return "Invalid"
-    
-    word_length = 0
-    if int(id) == 3:
-        collectionName = 'ThreeLetterWords'
-        word_length = 1065
-    elif int(id) == 4:
-        collectionName = 'FourLetterWords'
-        word_length = 4176
-    elif int(id) == 5:
-        collectionName = 'FiveLetterWords'
-        word_length = 9330
-    for x in range(0,10):
-        index = random.randrange(0, word_length)
-        doc_ref = wordDB.collection(collectionName).document(str(index))
-        doc = doc_ref.get()
-        if doc.exists:
-            jsonList[x] = doc.to_dict()["word"]
-        else:
-            print(u'No such document!')
-    return jsonify(jsonList)
+from App.database import db
+from App.model import threeLetterWords,fourLetterWords,fiveLetterWords
 
-def getWordsMultiple():
-    jsonList = {}
-    collectionName1 = 'ThreeLetterWords'
-    word_length1 = 1065
+def createWords(word,points,length):
+    if length == 3:
+        newWord = ThreeWord(word = word, points = points)
+    elif length == 4:
+        newWord = FourWord(word = word, points = points)
+    elif length == 5:
+        newWord = FiveWord(word = word, points = points)
+    else
+        return "Error"
+    db.session.add(newWord)
+    db.commit()
 
-    collectionName2 = 'FourLetterWords'
-    word_length2 = 4176
+def getWord(id,length):
+    if length == 3:
+        return ThreeWord.query.filterBy(id = id).first()
+    elif length == 4:
+        return FourWord.query.filterBy(id = id).first()
+    elif length == 5:
+        return FiveWord.query.filterBy(id = id).first()
+    else:
+        return []
 
-    collectionName3 = 'FiveLetterWords'
-    word_length3 = 9330
 
-    for x in range(0,3):
-        index = random.randrange(0, word_length1)
-        doc_ref = wordDB.collection(collectionName1).document(str(index))
-        doc = doc_ref.get()
-        if doc.exists:
-            jsonList[x] = doc.to_dict()["word"]
-        else:
-            print(u'No such document!')
-    for x in range(3,6):
-        index = random.randrange(0, word_length2)
-        doc_ref = wordDB.collection(collectionName2).document(str(index))
-        doc = doc_ref.get()
-        if doc.exists:
-            jsonList[x] = doc.to_dict()["word"]
-        else:
-            print(u'No such document!')
-    for x in range(6,10):
-        index = random.randrange(0, word_length3)
-        doc_ref = wordDB.collection(collectionName3).document(str(index))
-        doc = doc_ref.get()
-        if doc.exists:
-            jsonList[x] = doc.to_dict()["word"]
-        else:
-            print(u'No such document!')
-    return jsonify(jsonList)
+

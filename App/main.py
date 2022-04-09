@@ -16,17 +16,21 @@ from App.controllers import (
 )
 
 from App.models import (
-    wordGame
+    threeLetterWords
+    fourLetterWords
+    fiveLetterWords
 )
 
 from App.views import (
     user_views,
-    api_views
+    api_views,
+    word_views
 )
 
 views = [
     user_views,
-    api_views
+    api_views,
+    word_views
 ]
 
 def add_views(app, views):
