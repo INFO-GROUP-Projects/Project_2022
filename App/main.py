@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, jsonify
+from flask import Flask, jsonify,flash,redirect
 from flask_login import LoginManager, current_user
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
 from flask_cors import CORS
@@ -74,9 +74,11 @@ def getAllUsers():
     uList = [us.toDict() for us in u]
     return jsonify(uList)
 
-@app.route('/api/help')
+@app.route('/api/help', methods ={'POST'})
 def get_Help():
-    return "What is going on"
+    
+    flash('Hello everyone!')
+    return redirect('https://8080-infogroupprojec-project2-2qfc4b1mzre.ws-us38.gitpod.io/WordPage')
 
 @app.route('/api/getWordsSingular/<id>', methods = {'GET'})
 def getWordsId(id):

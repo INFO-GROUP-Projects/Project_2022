@@ -55,7 +55,7 @@ function populateVoiceList(){
 
     async function wordToSpeech(){
         data = await getWordsI()
-        let htmlBody = document.querySelector("#content")
+        let htmlBody = document.querySelector("#contents")
         let html
         html += `
             <input type ="text" id ="textBox"> 

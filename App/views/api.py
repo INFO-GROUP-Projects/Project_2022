@@ -8,4 +8,5 @@ def get_api_docs():
 
 @api_views.route('/WordPage')
 def returnWordPage():  
-  return render_template('wordPage.html')  
+  cGame = currentGame()
+  return render_template('wordPage.html', cGame = cGame)  

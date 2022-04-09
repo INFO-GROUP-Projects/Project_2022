@@ -6,8 +6,21 @@
 
 {% block content %}
 <body>
-    <button onclick ="wordToSpeech()"> Begin</button>
+    <button onclick ="wordToSpeech()" hidden ="false"> Begin</button>
+    {{cGame.userAnswer}}
+    {{cGame.points}}
+    {{cGame.submit}}
+    {{cGame.speakSlower}}
+    {{cGame.speakFaster}}
     <div id = 'content'>
+        <form method="POST" action ="/api/help">
+        <input type ="text" id ="textBox"> 
+        <label for = "textBox">Spell Word </label>
+        <input type ="button"  onclick="speakAgain()" value ="Slower"> 
+        <input type ="button"  onclick="speakAgain()" value="Speak">
+        <input type ="button" onclick="speakAgain()" value="Speak Faster">
+        <input type="submit"> 
+        </form>
         
     </div>
     <script src ="/static/VoiceBox.js"></script>

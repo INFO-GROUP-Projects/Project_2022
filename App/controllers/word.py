@@ -1,21 +1,12 @@
+#write code to intalize the words class and retrieve words and points 
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 import random
 from flask import jsonify
+from flask_wtf import FlaskForm
+from wtforms import StringField,HiddenField,SubmitField
 
-wordDB = firestore.client()
-
-class Words(object):
-        def __init__(self, word,id):
-            self.id = id
-            self.word = word
-
-        def to_dict(self):
-            return {
-                'id':self.id,
-                'word':self.word
-            }
 def getWordsSingular(id):
     jsonList = {}
     if int(id) < 3 or int(id) > 5:
