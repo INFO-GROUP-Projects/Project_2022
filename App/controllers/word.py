@@ -6,7 +6,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField,HiddenField,SubmitField
 
 from App.database import db
-from App.model import threeLetterWords,fourLetterWords,fiveLetterWords
+from App.models import threeLetterWords,fourLetterWords,fiveLetterWords
 
 def createWords(word,points,length):
     if length == 3:
@@ -15,7 +15,7 @@ def createWords(word,points,length):
         newWord = FourWord(word = word, points = points)
     elif length == 5:
         newWord = FiveWord(word = word, points = points)
-    else
+    else:
         return "Error"
     db.session.add(newWord)
     db.commit()

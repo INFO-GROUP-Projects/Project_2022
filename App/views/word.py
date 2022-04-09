@@ -10,6 +10,6 @@ from App.controllers import (
 
 word_views = Blueprint('word_views', __name__, template_folder='../templates')
 
-@api_views.route('/WordPage')
+@word_views.route('/WordPage')
 def returnWordPage():  
   return render_template('wordPage.html')  

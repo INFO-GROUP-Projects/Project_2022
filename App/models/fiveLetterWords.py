@@ -8,7 +8,7 @@ class FiveWords(object):
         def to_dict(self):
             return {
                 'id':self.id,
-                'word':self.word
+                'word':self.word,
                 'points':self.points
             }
 #class currentGame(FlaskForm):

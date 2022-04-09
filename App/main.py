@@ -16,9 +16,9 @@ from App.controllers import (
 )
 
 from App.models import (
-    threeLetterWords
-    fourLetterWords
-    fiveLetterWords
+    threeLetterWords,
+    fourLetterWords,
+    fiveLetterWords,
 )
 
 from App.views import (
