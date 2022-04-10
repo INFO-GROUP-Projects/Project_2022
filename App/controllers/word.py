@@ -1,5 +1,6 @@
 #write code to intalize the words class and retrieve words and points 
 
+import json
 import random
 from flask import jsonify
 from flask_wtf import FlaskForm
@@ -7,6 +8,23 @@ from wtforms import StringField,HiddenField,SubmitField
 
 from App.database import db
 from App.models import threeLetterWords,fourLetterWords,fiveLetterWords
+
+def init_words():
+    with open ("/models/3-letter-words.json") as file:
+        jsonData = json.load(file)
+        for i in jsonData:
+            createWords(jsonData[i].word , jsonData[i].word.length, jsonData[i].word.length)
+            
+    with open ("/models/4-letter-words.json") as file:
+        jsonData = json.load(file)
+        for i in jsonData:
+            createWords(jsonData[i].word , jsonData[i].word.length, jsonData[i].word.length)
+
+    with open ("/models/5-letter-words.json") as file:
+        jsonData = json.load(file)
+        for i in jsonData:
+            createWords(jsonData[i].word , jsonData[i].word.length, jsonData[i].word.length)
+    
 
 def createWords(word,points,length):
     if length == 3:

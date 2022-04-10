@@ -7,11 +7,7 @@
 {% block content %}
 <body>
     <button onclick ="wordToSpeech()" hidden ="false"> Begin</button>
-    {{cGame.userAnswer}}
-    {{cGame.points}}
-    {{cGame.submit}}
-    {{cGame.speakSlower}}
-    {{cGame.speakFaster}}
+   
     <div id = 'content'>
         <form method="POST" action ="/api/help">
         <input type ="text" id ="textBox"> 
