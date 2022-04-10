@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  project2022:
+    image: project2022
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 5002:5002

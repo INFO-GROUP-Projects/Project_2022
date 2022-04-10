@@ -3,8 +3,7 @@ from flask import Flask
 from flask.cli import with_appcontext
 from App.database import create_db
 from App.main import app, migrate
-from App.controllers import ( create_user, get_all_users_json )
-#from App.models import (getWordsSingular)
+from App.controllers import ( create_user, get_all_users_json,createWords)
 
 
 @app.cli.command("init")
@@ -23,7 +22,6 @@ def create_user_command(username, password):
 def get_users():
     print(get_all_users_json())
 
-#@app.cli.command("get-Random-Word")
-#@click.argument("id")
-#def get_Word(id):
- #getWordsSingular(id)
+@app.cli.command("create-words")
+def create_word():
+ createWords()
