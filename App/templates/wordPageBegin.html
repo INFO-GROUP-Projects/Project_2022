@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}Word Page{% endblock %}
+{% block page %}Word Page{% endblock %}
+
+{{ super() }}
+
+{% block content %}
+<body>
+    
+   
+    <div id = 'content'>
+        <form method="POST" action ="/WordPage/1">
+            {{userStats.currentScore (value = currentScore) }}
+            {{userStats.correctWords (value = correctWords) }}
+            {{userStats.incorrectWords (value = incorrectWords) }}
+            {{userStats.index (value = currentIndex)}}
+            {{userStats.submit (value = 'Begin')}}     
+        </form>
+        
+    </div>
+    <script src ="/static/VoiceBox.js"></script>
+</body>
+    
+{% endblock %}

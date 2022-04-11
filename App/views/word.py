@@ -11,13 +11,39 @@ from App.controllers import (
 from App.models.currentGame import currentGame
 
 word_views = Blueprint('word_views', __name__, template_folder='../templates')
-
 @word_views.route('/WordPage')
-def returnWordPage(): 
+def init_wordPage():
+  userStats = currentGame()
+  currentScore = 0
+  correctWords = 0
+  incorrectWords = 0 
+  currentIndex = 1
+  return render_template('wordPageBegin.html',currentIndex =currentIndex ,incorrectWords = incorrectWords,
+  correctWords = correctWords, currentScore = currentScore,  userStats = userStats )
+
+@word_views.route('/WordPage/<id>', methods={'POST'})
+def returnWordPage(id): 
+  data = request.form
+  
+  currentScore = data['currentScore']
+  correctWords =  data['correctWords']
+  incorrectWords =  data['incorrectWords']
+  currentIndex =  data['index']
+
+  print('Hello')
+
+  if id > currentIndex:
+    return "Error"
+  
   cGame = currentGame()
-  spellWord = getWordRand()["word"]
-  uPoints = 0
-  return render_template('wordPage.html',cGame = cGame , spellWord = spellWord,uPoints =uPoints)  
+  
+  returnVar = getWordRand()
+  spellWord = returnVar["word"]
+  uPoints = returnVar["points"]
+  
+  return render_template('wordPage.html',cGame = cGame , spellWord = spellWord,uPoints =uPoints,
+  currentIndex =currentIndex ,incorrectWords = incorrectWords,correctWords = correctWords, 
+  currentScore = currentScore)  
 
 @word_views.route('/api/getWord/', methods = {'GET'})
 def getWordsId():
@@ -26,10 +52,18 @@ def getWordsId():
 @word_views.route('/api/validate/', methods = {'POST'})
 def validate_word():
     data = request.form
+    currentScore = data['currentScore']
+    correctWords =  data['correctWords']
+    incorrectWords =  data['incorrectWords']
+    currentIndex =  data['index']
+    points_gained = data['points']
     cGame = currentGame()
+
     if  data['spellingWord'] == data['userWord'] :
       flash('Correct')
-      uPoints = int(data['points']) + 1
+      currentScore = currentScore + points
+      correct_words = correct_words + 1
     else:
       flash('Incorrect')
-    return redirect('http://127.0.0.1:8080/WordPage')
+    currentIndex =  currentIndex + 1
+    return redirect('/WordPage/')
