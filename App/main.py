@@ -7,12 +7,12 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from datetime import timedelta
-#from gtts import gTTS
 
 from App.database import init_db, get_migrate
 
 from App.controllers import (
     setup_jwt
+    word
 )
 
 from App.models import (
@@ -78,12 +78,9 @@ def getAllUsers():
     uList = [us.toDict() for us in u]
     return jsonify(uList)
 
-@app.route('/api/help', methods ={'POST'})
-def get_Help():
-    
-    flash('Hello everyone!')
-    return redirect('https://8080-infogroupprojec-project2-2qfc4b1mzre.ws-us38.gitpod.io/WordPage')
-
+@app.route('/api/init')
+def instance_words():
+    init_words()
 @app.route('/api/getWordsSingular/<id>', methods = {'GET'})
 def getWordsId(id):
     return wordGame.getWordsSingular(id)
