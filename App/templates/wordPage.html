@@ -9,13 +9,12 @@
     <button onclick ="wordToSpeech()" hidden ="false"> Begin</button>
    
     <div id = 'content'>
-        <form method="POST" action ="/api/help">
-        <input type ="text" id ="textBox"> 
-        <label for = "textBox">Spell Word </label>
-        <input type ="button"  onclick="speakAgain()" value ="Slower"> 
-        <input type ="button"  onclick="speakAgain()" value="Speak">
-        <input type ="button" onclick="speakAgain()" value="Speak Faster">
-        <input type="submit"> 
+        <form method="POST" action ="/api/validate">
+            {{cGame.userWord}}
+            {{cGame.spellingWord (value = spellWord )}}
+            {{cGame.points}}
+            {{cGame.submit}}           
+            <input type="button" value = "speak" onclick="wordToSpeech()">
         </form>
         
     </div>

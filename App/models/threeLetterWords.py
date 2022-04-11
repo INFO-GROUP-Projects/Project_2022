@@ -1,11 +1,16 @@
 #word model stores information about the model nothing else
-class ThreeWords(object):
-        def __init__(self,id, word,points):
+from App.database import db
+class ThreeWords(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    word =  db.Column(db.String(3), nullable=False)
+    points = db.Column(db.Integer, nullable=False)
+
+    def __init__(self,id, word,points):
             self.id = id
             self.word = word
             self.points =points
 
-        def to_dict(self):
+    def to_dict(self):
             return {
                 'id':self.id,
                 'word':self.word,

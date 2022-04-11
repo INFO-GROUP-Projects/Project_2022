@@ -11,14 +11,14 @@ from datetime import timedelta
 from App.database import init_db, get_migrate
 
 from App.controllers import (
-    setup_jwt
-    word
+    setup_jwt,
+    word,
+    init_words
 )
 
 from App.models import (
     threeLetterWords,
     fourLetterWords,
-    fiveLetterWords,
 )
 
 from App.views import (
@@ -78,16 +78,9 @@ def getAllUsers():
     uList = [us.toDict() for us in u]
     return jsonify(uList)
 
-@app.route('/api/init')
-def instance_words():
-    init_words()
-@app.route('/api/getWordsSingular/<id>', methods = {'GET'})
-def getWordsId(id):
-    return wordGame.getWordsSingular(id)
-
-@app.route('/api/getWordsIncrements/' , methods = {'GET'})
-def getWordsIncrement():
-    return wordGame.getWordsMultiple()
+#@app.route('/api/init')
+#def instance_words():
+   # init_words()
 
 migrate = get_migrate(app)
 

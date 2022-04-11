@@ -3,7 +3,7 @@ var synth = window.speechSynthesis
 var voices = []
 var data
 var default_voice
-var passWord
+var passWord = document.getElementById("spellingWord").value
 var index = 0
 
 function populateVoiceList(){
@@ -41,56 +41,14 @@ function populateVoiceList(){
         utterThis.rate = 0.75;
         synth.speak(utterThis);
       }
-    
-      function updateText(index){
-        passWord = "Spell the word     " + data[index];
-      }
-    
-    
-    async function getWordsI(){
-        let response = await fetch("https://"+window.location.host+'/api/getWordsIncrements/')
-        data = await response.json()
-        return data
-    }
 
-    async function wordToSpeech(){
-        data = await getWordsI()
-        let htmlBody = document.querySelector("#contents")
-        let html
-        html += `
-            <input type ="text" id ="textBox"> 
-            <label for = "textBox">Spell Word </label>
-            <button onclick="speakAgain()"> Speak Slower </button>
-            <button onclick="speakAgain()"> Speak </button>
-            <button onclick="speakAgain()"> Speak Faster </button>
-            <button onclick = "validate_Word()">Submit </button>
-        `
-        htmlBody.innerHTML = html
-        updateText(index)
-    }
-
-    function speakAgain(){
+     function wordToSpeech(){  
+        passWord = "Spell the word     " + passWord
         speak()
     }
 
-    function validate_Word(){
-        let inputField = document.querySelector('#textBox')
-        let comp = inputField.value
-
-        if(comp === data[index]){
-            //do something
-            console.log("Correct")
-            if(index < 9){
-                index = index + 1
-                updateText(index)
-                speakAgain()
-            }
-           
-        }
-        else{
-            console.log("Incorrect word is " +data[index])
-            //do something else
-        }
+    function speakAgain(){
+        speak() 
     }
         
 
