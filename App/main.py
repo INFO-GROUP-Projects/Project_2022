@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, jsonify,flash,redirect
+from flask import Flask, jsonify,flash,redirect, render_template
 from flask_login import LoginManager, current_user
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
 from flask_cors import CORS
@@ -77,6 +77,14 @@ def getAllUsers():
         return []
     uList = [us.toDict() for us in u]
     return jsonify(uList)
+
+@app.route('/login')
+def getLoginPage():
+    return render_template('login.html')
+
+@app.route('/signup')
+def getSignUpPage():
+    return render_template('signup.html')
 
 #@app.route('/api/init')
 #def instance_words():
