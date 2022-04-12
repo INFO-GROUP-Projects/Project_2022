@@ -7,36 +7,37 @@ from App.controllers import (
     createWords, 
     getWord,
     getWordRand,
+    user,
 )
 from App.models.currentGame import currentGame
 
 word_views = Blueprint('word_views', __name__, template_folder='../templates')
+
 @word_views.route('/WordPage')
 def init_wordPage():
   userStats = currentGame()
-  currentScore = 0
-  correctWords = 0
-  incorrectWords = 0 
-  currentIndex = 1
-  return render_template('wordPageBegin.html',currentIndex =currentIndex ,incorrectWords = incorrectWords,
-  correctWords = correctWords, currentScore = currentScore,  userStats = userStats )
+  userData = {
+    "currentScore": 0,
+    "correctWords": 0,
+    "incorrectWords":0,
+    "currentIndex": 3
+  }
+  return render_template('wordPageBegin.html',  userStats = userStats, userData = userData )
 
-@word_views.route('/WordPage/', methods={'POST'})
+@word_views.route('/WordPage', methods={'POST'})
 def returnWordPage(): 
   data = request.form
-  currentScore = data['currentScore']
-  correctWords =  data['correctWords']
-  incorrectWords =  data['incorrectWords']
-  currentIndex =  data['index']
+  userData = {}
+  userData['currentScore'] =  data['currentScore']
+  userData['correctWords'] = data['correctWords'] 
+  userData['incorrectWords'] = data['incorrectWords']
+  userData ['currentIndex'] = data['index']
+  returnVar = getWordRand()
+  userData["word"] = returnVar["word"]
+  userData["points"] = returnVar["points"]
   cGame = currentGame()
   
-  returnVar = getWordRand()
-  spellWord = returnVar["word"]
-  uPoints = returnVar["points"]
-  
-  return render_template('wordPage.html',cGame = cGame , spellWord = spellWord,uPoints =uPoints,
-  currentIndex =currentIndex ,incorrectWords = incorrectWords,correctWords = correctWords, 
-  currentScore = currentScore)  
+  return render_template('wordPage.html',cGame = cGame , userData = userData)  
 
 @word_views.route('/api/getWord/', methods = {'GET'})
 def getWordsId():
@@ -45,27 +46,28 @@ def getWordsId():
 @word_views.route('/api/validate/', methods = {'POST'})
 def validate_word():
     data = request.form
-    currentScore = int(data['currentScore'])
-    correctWords =  int(data['correctWords'])
-    incorrectWords =  int(data['incorrectWords'])
-    currentIndex =  int(data['index'])
-    points_gained = int(data['points'])
+    userData = {}
+    userData['currentScore'] = int(data['currentScore'])
+    userData['correctWords'] =  int(data['correctWords'])
+    userData['incorrectWords'] =  int(data['incorrectWords'])
+    userData['currentIndex'] =  int(data['index'])
+    userData['points_gained'] = int(data['points'])
     cGame = currentGame()
 
     if  data['spellingWord'] == data['userWord'] :
       flash('Correct')
-      currentScore = currentScore + points_gained
-      correctWords = correctWords + 1
+      userData['currentScore']= userData['currentScore'] + userData['points_gained']
+      userData['correctWords'] = userData['correctWords'] + 1
     else:
       flash('Incorrect')
-      incorrectWords = incorrectWords + 1
+      userData['incorrectWords'] = userData['incorrectWords'] + 1
+      userData['currentIndex'] = userData['currentIndex'] - 1 
+
+    if userData['currentIndex'] == 0:
+      render_template('endGame.html', userData = userData)
 
     returnVar = getWordRand()
-    spellWord = returnVar["word"]
-    uPoints = returnVar["points"]
+    userData["word"] = returnVar["word"]
+    userData["points"] = returnVar["points"]
 
-    return render_template('wordPage.html',cGame = cGame , spellWord = spellWord,uPoints =uPoints,
-  currentIndex =currentIndex ,incorrectWords = incorrectWords,correctWords = correctWords, 
-  currentScore = currentScore) 
-
-    #return redirect('/WordPage/')
+    return render_template('wordPage.html',cGame = cGame , userData = userData) 

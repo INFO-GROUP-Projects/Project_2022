@@ -7,8 +7,6 @@ class Stat(db.Model):
     incorrect_words = db.Column(db.Integer, nullable=False)
     id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) # foreign key that links Stat to User Class
 
-
-
     def toDict(self):
         return{
             'stat_id': self.stat_id,

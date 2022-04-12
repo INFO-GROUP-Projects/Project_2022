@@ -6,19 +6,30 @@
 
 {% block content %}
 <body>
-    <div id = 'content'>
-        <form method="POST" action ="/api/validate">
+    <div id = 'content' class = "container">
+        <div class = "row">
+           <h3 class = "col s6 ">Points: {{userData['currentScore']}}</h3> 
+           <h3 class = "col s6 "> Hearts: {{userData['currentIndex']}} /3 </h3> 
+        </div>
+        
+        
+        <form method="POST" action ="/api/validate" class = "card grey lighten-3" >
             {{cGame.userWord}}
-            {{cGame.spellingWord (value = spellWord )}}
-            {{cGame.points (value = uPoints) }}
+            {{cGame.spellingWord (value = userData['word'] )}}
+            {{cGame.points (value = userData['points']) }}
             {{cGame.submit}}     
-            {{cGame.currentScore (value = currentScore) }}
-            {{cGame.correctWords (value = correctWords) }}
-            {{cGame.incorrectWords (value = incorrectWords) }}
-            {{cGame.index (value = currentIndex)}}      
+            {{cGame.currentScore (value = userData['currentScore']) }}
+            {{cGame.correctWords (value = userData['correctWords']) }}
+            {{cGame.incorrectWords (value = userData['incorrectWords']) }}
+            {{cGame.index (value = userData['currentIndex']) }} 
+            {{cGame.willItWork (value = stats) }} 
+
             <input type="button" value = "speak" onclick="wordToSpeech()">
         </form>
-        
+            <table>
+                <th>Answer</th>
+                <th>User Entered</th>
+            </table>
     </div>
     <script src ="/static/VoiceBox.js"></script>
 </body>
