@@ -9,14 +9,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" type="image/x-icon" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename = 'images/favicon-32x32.png')}}">
     <title>{% block title %}{% endblock %}</title>
 
   </head>
   <body>
     <nav class="blue">
       <div class="nav-wrapper">
-        <a href="#!" class="brand-logo center"><img src="{{'/images/logo.PNG'}}" alt="LOGO"/>{% block page %}{% endblock %}</a>
+        <!-- <img src="{{url_for('static', filename = 'images/logo.PNG')}}" alt="LOGO"/> -->
+        <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="left">
                 <!-- <li><a href="/">Home</a></li>
