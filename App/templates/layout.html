@@ -16,8 +16,7 @@
   <body>
     <nav class="blue">
       <div class="nav-wrapper">
-        <img src="{{url_for('images', filename='logo.PNG')}}" class="center"/>
-        <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
+        <a href="#!" class="brand-logo center"><img src="{{'/images/logo.PNG'}}" alt="LOGO"/>{% block page %}{% endblock %}</a>
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="left">
                 <!-- <li><a href="/">Home</a></li>
