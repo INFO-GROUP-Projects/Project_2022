@@ -11,10 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="icon" type="image/x-icon" href="{{url_for('static', filename = 'images/favicon-32x32.png')}}">
     <title>{% block title %}{% endblock %}</title>
-
   </head>
   <body>
-    <nav class="blue">
+    <nav class="#2962ff blue accent-4">
       <div class="nav-wrapper">
         <img src="{{url_for('static', filename = 'images/logo.PNG')}}" alt="LOGO" height="85" class="brand-logo"/>
         <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>

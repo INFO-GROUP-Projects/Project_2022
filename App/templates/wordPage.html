@@ -12,7 +12,9 @@
            <h3 class = "col s6 "> Hearts: {{userData['currentIndex']}} /3 </h3> 
         </div>
         
-        
+        <img src="{{url_for('static', filename = 'images/gamemaster.PNG')}}" alt="gamemaster" height="400" class="center" onclick="wordToSpeech()"/>
+
+        <p class="center"> Click the Game Master to play the word</p>
         <form method="POST" action ="/api/validate" class = "card grey lighten-3" >
             {{cGame.userWord}}
             {{cGame.spellingWord (value = userData['word'] )}}
@@ -22,8 +24,6 @@
             {{cGame.correctWords (value = userData['correctWords']) }}
             {{cGame.incorrectWords (value = userData['incorrectWords']) }}
             {{cGame.index (value = userData['currentIndex']) }} 
-
-            <input type="button" value = "speak" onclick="wordToSpeech()">
         </form>
             <table>
                 <th>Answer</th>
@@ -31,6 +31,7 @@
             </table>
     </div>
     <script src ="/static/VoiceBox.js"></script>
+    
 </body>
     
 {% endblock %}
