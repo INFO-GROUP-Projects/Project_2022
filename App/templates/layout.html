@@ -15,7 +15,9 @@
   <body>
     <nav class="#2962ff blue accent-4">
       <div class="nav-wrapper">
-        <img src="{{url_for('static', filename = 'images/logo.PNG')}}" alt="LOGO" height="85" class="brand-logo"/>
+        <a href="/">
+          <img src="{{url_for('static', filename = 'images/logo.PNG')}}" alt="LOGO" height="85" class="brand-logo"/>
+        </a>
         <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="left">
