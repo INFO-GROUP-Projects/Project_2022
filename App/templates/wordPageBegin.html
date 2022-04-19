@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
-{% block title %}Word Page{% endblock %}
-{% block page %}Word Page{% endblock %}
+{% block title %}Spelling Bee{% endblock %}
+{% block page %}SPELLING BEE{% endblock %}
 
 {{ super() }}
 
@@ -16,8 +16,10 @@
             {{userStats.correctWords (value = userData["correctWords"]) }}
             {{userStats.submit (value = 'Begin')}}     
         </form>
-        
     </div>
+
+
+    <a href="/" class="#2962ff blue accent-4 waves-effect waves-light btn"> QUIT </a>
 </body>
     
 {% endblock %}

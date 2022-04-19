@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
-{% block title %}Word Page{% endblock %}
-{% block page %}Word Page{% endblock %}
+{% block title %}Spelling Bee{% endblock %}
+{% block page %}SPELL THE WORD{% endblock %}
 
 {{ super() }}
 
@@ -12,7 +12,9 @@
            <h3 class = "col s6 "> Hearts: {{userData['currentIndex']}} /3 </h3> 
         </div>
         
-        
+        <img src="{{url_for('static', filename = 'images/gamemaster.PNG')}}" alt="gamemaster" height="400" class="center" onclick="wordToSpeech()"/>
+
+        <p class="center"> Click the Game Master to play the word</p>
         <form method="POST" action ="/api/validate" class = "card grey lighten-3" >
             {{cGame.userWord}}
             {{cGame.spellingWord (value = userData['word'] )}}
@@ -22,16 +24,15 @@
             {{cGame.correctWords (value = userData['correctWords']) }}
             {{cGame.incorrectWords (value = userData['incorrectWords']) }}
             {{cGame.index (value = userData['currentIndex']) }} 
-            {{cGame.willItWork (value = stats) }} 
-
-            <input type="button" value = "speak" onclick="wordToSpeech()">
         </form>
+        <a href="/" class="#2962ff blue accent-4 waves-effect waves-light btn">QUIT</a>
             <table>
                 <th>Answer</th>
                 <th>User Entered</th>
             </table>
     </div>
     <script src ="/static/VoiceBox.js"></script>
+    
 </body>
     
 {% endblock %}
