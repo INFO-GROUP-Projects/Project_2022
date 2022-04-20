@@ -13,7 +13,7 @@ def signup():
 
 
 @signup_views.route('/signup', methods=['POST'])
-def singUp():
+def signUp():
   form = SignUp() 
   if form.validate_on_submit():
     data = request.form 
