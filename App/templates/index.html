@@ -2,14 +2,141 @@
 {% block title %}Spelling Bee{% endblock %}
 {% block page %}SPELLING BEE{% endblock %}
 
+
+
 {{ super() }}
 
-{% block content %}
-    <h1>Home Page</h1>
-    <p>to be designed by Amanda</p>
 
-    <a href="/login" class="#2962ff blue accent-4 waves-effect waves-light btn"> LOG IN </a>
-    <br>
-    <br>
-    <a href="/signup" class="#2962ff blue accent-4 waves-effect waves-light btn"> SIGN UP </a>
+{% block content %}
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Candal&family=Khand:wght@300&family=News+Cycle&family=Rajdhani&family=Rubik+Mono+One&family=Yanone+Kaffeesatz:wght@200&display=swap" rel="stylesheet">
+    
+</head> 
+
+<style>
+    body  {
+        background-image: url("{{url_for('static', filename = 'images2/background.jpg')}}");
+        background-size: cover ;
+        background-repeat: no-repeat;
+        background-color: lightsteelblue;
+          }
+      
+            h1{
+               font-family: 'Candal', sans-serif;
+            }
+      
+            p{
+              color:white;
+              font-family:'Rubik Mono One', sans-serif;
+            }
+      
+           h4{
+              font-family:'Khand', sans-serif;
+           }
+      
+          
+      
+        @keyframes example {
+        from {opacity: 0.8;}
+        to {opacity: 0;}
+      }
+      
+      
+          
+          #crowd{
+            position: absolute;
+            left:0px;
+            bottom: 0px;
+            animation-name:example;
+            animation-duration:2s;
+            animation-iteration-count: infinite;
+          }
+      
+      
+          #crowd2{
+            position: absolute;
+            right:0px;
+            bottom: 0px;
+            animation-name:example;
+            animation-duration:2s;
+            animation-iteration-count: infinite;
+          }
+      
+          #trophy{
+            height:200px;
+            width:180px;
+          }
+      
+      
+          
+          #button{
+            background-image: linear-gradient(#01579b, white);
+          }
+
+          #one{
+              height:10px;
+          }
+      
+</style>
+
+     <body>
+
+    <div id="one">
+
+    </div>
+    
+      <div class="section">
+      <h1 class="center-align #eeeeee grey-text text-lighten-3"> 
+        SPELLING BEE CHAMPIONS </h1>
+    
+        <br>
+        <h4 class="center-align white-text">
+          Do you have what it takes to win the ultimate prize?</h4>
+    
+          
+      </div>
+      
+    
+      <div>
+    
+      <img id="crowd" src="{{url_for('static', filename = 'images2/crowd.jpg')}}">
+    
+      <img id="crowd2" src="{{url_for('static', filename = 'images2/crowd.jpg')}}">
+    
+        
+      </div> 
+    
+    
+    
+        <div class= "section center-align">
+                                     
+        <a href="/login" id="button" class="waves-effect waves-light btn-large #0277bd light-blue darken-3 
+         white-text
+         "><b>Log In</b></a>
+         </div>
+    
+    
+    
+      <div class="section center-align">
+    
+      
+    
+        <a href="/signup" id="button" class="center-align waves-effect waves-light btn-large #0277bd light-blue darken-3
+         white-text 
+         "><b>Sign Up</b></a>
+    
+        
+          </div>
+    
+    
+    
+        <div class="section center-align">
+          <br>
+          <img src="{{url_for('static', filename = 'images2/trophy.png')}}" id="trophy">
+        </div>
+    
+    
+
+</body>
+
 {% endblock %}
