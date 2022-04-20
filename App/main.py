@@ -92,10 +92,4 @@ def getSignUpPage():
 
 migrate = get_migrate(app)
 
-#gTTS used to create audio file of word generated
-#textTest = "word sound"
-#language = 'en'
 
-#output = gTTS(text = textTest, lang = language, slow = False)
-
-#output.save("word.mp3")

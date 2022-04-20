@@ -6,8 +6,7 @@ import random
 from App.controllers import (
     createWords, 
     getWord,
-    getWordRand,
-    user,
+    getWordRand
 )
 from App.models.currentGame import currentGame
 
