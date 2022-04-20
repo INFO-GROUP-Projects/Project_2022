@@ -2,7 +2,6 @@
 
 import json
 import random
-from flask import jsonify
 
 
 from App.database import db

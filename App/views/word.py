@@ -1,11 +1,8 @@
 #write code to create and actually manipulate word page here
 from flask import Blueprint, redirect, render_template, jsonify, request, send_from_directory,flash, url_for
 from flask_jwt import jwt_required
-import random
 
 from App.controllers import (
-    createWords, 
-    getWord,
     getWordRand
 )
 from App.models.currentGame import currentGame

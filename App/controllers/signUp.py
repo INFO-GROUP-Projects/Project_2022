@@ -1,2 +1,4 @@
-from App.database import db
 from App.models import SignUp
+
+def create_form():
+    return SignUp()
