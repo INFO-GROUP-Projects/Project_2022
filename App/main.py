@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, jsonify,flash,redirect, render_template, url_for,request as r
+from flask import Flask, jsonify,flash,redirect, render_template, url_for,request 
 from flask_login import LoginManager, current_user
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
 from flask_cors import CORS
@@ -100,7 +100,7 @@ def getLoginPage():
 def loginAction():
     form = LogIn()
     if form.validate_on_submit():
-        data = r.form
+        data = request.form
         user = validate_User(data['username'], data['password'])
         if user is None:
             flash('Invalid credentials')
