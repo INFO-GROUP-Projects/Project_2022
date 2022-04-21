@@ -6,6 +6,13 @@
 
 {% block content %}
 {% if current_user.is_authenticated %}
+<style>
+    body  {
+        background-image: url("{{url_for('static', filename = 'images2/background.jpg')}}");
+        background-size: cover ;
+        background-repeat: no-repeat;
+          }
+</style>
 <body>
     <div id = 'content' class = "container">
         <div class = "row">
@@ -21,13 +28,13 @@
             {{cGame.spellingWord (value = userData['word'] )}}
             {{cGame.points (value = userData['points']) }}
             {{cGame.submit}}     
+            <a href="/" class="left-align btn white-text #0d47a1 blue darken-4">QUIT</a>   
             {{cGame.currentScore (value = userData['currentScore']) }}
             {{cGame.correctWords (value = userData['correctWords']) }}
             {{cGame.incorrectWords (value = userData['incorrectWords']) }}
             {{cGame.index (value = userData['currentIndex']) }} 
             {{cGame.dateTime (value = userData['startTime'])}}
         </form>
-        <a href="/" class="#2962ff blue accent-4 waves-effect waves-light btn">QUIT</a>
             <table>
                 <th>Answer</th>
                 <th>User Entered</th>
