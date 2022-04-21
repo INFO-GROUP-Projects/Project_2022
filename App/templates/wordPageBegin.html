@@ -109,15 +109,13 @@
         <div class= "section center-align">
                                      
             <div id = 'content' >
-                <form method="POST" action ="/WordPage" class ="col s12 center-align waves-effect waves-light btn-large
-                white-text" id="button2"
-                >
+                <form method="POST" action ="/WordPage" class ="col s12">
                     {{userStats.index (value = userData["currentIndex"]) }}
                     {{userStats.incorrectWords (value = userData["incorrectWords"]) }}
                     {{userStats.currentScore (value = userData["currentScore"]) }}
                     {{userStats.correctWords (value = userData["correctWords"]) }}
                     {{userStats.dateTime (value = userData['startTime'])}}
-                    {{userStats.submit (value = 'Begin')}}     
+                    {{userStats.submit (value = 'Begin', id="button2", class="btn-large white-text #0d47a1 blue darken-4")}}     
                 </form>
             </div>
     
