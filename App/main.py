@@ -1,12 +1,22 @@
 import os
 import json
-from flask import Flask, jsonify,flash,redirect, render_template
+from flask import Flask, jsonify,flash,redirect, render_template, url_for,request as r
 from flask_login import LoginManager, current_user
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
 from flask_cors import CORS
+from requests import request
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from datetime import timedelta
+from App.controllers.auth import login_user
+from App.controllers.user import validate_User
+
+login_manager = LoginManager()
+
+login_manager = LoginManager()
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
 from App.database import init_db, get_migrate
 
@@ -18,6 +28,7 @@ from App.controllers import (
 
 from App.models import (
     login,
+    User,
     SignUp,
     LogIn
 )
@@ -65,6 +76,7 @@ def create_app(config={}):
     add_views(app, views)
     init_db(app)
     setup_jwt(app)
+    login_manager.init_app(app)
     app.app_context().push()
     return app
 
@@ -83,6 +95,19 @@ def getAllUsers():
 def getLoginPage():
     form = LogIn()
     return render_template('login.html',form =form)
+
+@app.route('/login', methods = {'POST'})
+def loginAction():
+    form = LogIn()
+    if form.validate_on_submit():
+        data = r.form
+        user = validate_User(data['username'], data['password'])
+        if user is None:
+            flash('Invalid credentials')
+        else:  
+            flash('Login successful')
+            login_user(user,True)
+        return redirect('/WordPage')
 
 @app.route('/signup')
 def getSignUpPage():

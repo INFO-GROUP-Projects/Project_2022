@@ -1,6 +1,7 @@
 
 from flask import Blueprint, redirect, render_template, jsonify, request, send_from_directory,flash, url_for
 from flask_jwt import jwt_required
+from flask_login import login_required
 
 from App.controllers import (
     getWordRand

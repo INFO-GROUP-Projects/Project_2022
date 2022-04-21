@@ -5,7 +5,7 @@
 {{ super() }}
 
 {% block content %}
-
+{% if current_user.is_authenticated %}
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Candal&family=Khand:wght@300&family=News+Cycle&family=Rajdhani&family=Rubik+Mono+One&family=Yanone+Kaffeesatz:wght@200&display=swap" rel="stylesheet">
     
@@ -142,5 +142,5 @@
     
 
 </body>
-    
+{% endif %}
 {% endblock %}

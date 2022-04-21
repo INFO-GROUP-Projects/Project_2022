@@ -5,6 +5,7 @@
 {{ super() }}
 
 {% block content %}
+{% if current_user.is_authenticated %}
 <body>
     <div id = 'content' class = "container">
         <div class = "row">
@@ -34,5 +35,5 @@
     <script src ="/static/VoiceBox.js"></script>
     
 </body>
-    
+{% endif %}
 {% endblock %}
