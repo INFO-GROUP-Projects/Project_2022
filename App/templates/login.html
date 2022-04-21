@@ -5,10 +5,21 @@
 {{ super() }}
 
 {% block content %}
+    
+
+    <body>
+
     <h1>Log In Form</h1>
-    <p>to be designed by Amanda</p>
+    
+    <div class="section">
+        <h5>Please enter your Login information.<h5>
+    </div>
 
     <p> Succesful Login should automatically redirect user to start game page, <br>
-    for testing purposes this is navigated through this button: </p>
-    <button><a href="/WordPage"> FOR Test </a></button>
+    for testing purposes this is navigated through this button: </p> <br>
+
+    <a class="center-align waves-effect waves-light btn-large #2962ff blue accent-4
+    white-text" href="/WordPage"> Return to Home Page </a>
+
+    </body>
 {% endblock %}
