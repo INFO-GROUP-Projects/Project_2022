@@ -5,6 +5,7 @@
 {{ super() }}
 
 {% block content %}
+
 <div class="row">
       
     <form class="col s12 m8 offset-m2" method="POST" action="/login">
@@ -21,9 +22,15 @@
         </div>
 
         <div class="input-field col s12 m8 offset-m2">
-          {{form.submit}}
+          {{ form.submit (class="btn white-text #0d47a1 blue darken-4")}}
+          <br>
+          <p></p>
+          <br>
+          <a href="/signup" class="black-text"><u><i>I don't have an account</i></u></a>
         </div> 
+        
     </form>
   
 </div>
+
 {% endblock %}

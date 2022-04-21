@@ -6,29 +6,36 @@
 
 {% block content %}
 {% if current_user.is_authenticated %}
+<style>
+    body  {
+        background-image: url("{{url_for('static', filename = 'images2/background.jpg')}}");
+        background-size: cover ;
+        background-repeat: no-repeat;
+          }
+</style>
 <body>
     <div id = 'content' class = "container">
         <div class = "row">
-           <h3 class = "col s6 ">Points: {{userData['currentScore']}}</h3> 
-           <h3 class = "col s6 "> Hearts: {{userData['currentIndex']}} /3 </h3> 
+           <h3 class = "col s6 white-text">Points: {{userData['currentScore']}}</h3> 
+           <h3 class = "col s6 white-text"> Hearts: {{userData['currentIndex']}} /3 </h3> 
         </div>
         
         <img src="{{url_for('static', filename = 'images/gamemaster.PNG')}}" alt="gamemaster" height="400" class="center" onclick="wordToSpeech()"/>
 
-        <p class="center"> Click the Game Master to play the word</p>
+        <p class="center white-text"> Click the Game Master to play the word</p>
         <form method="POST" action ="/api/validate" class = "card grey lighten-3" >
             {{cGame.userWord}}
             {{cGame.spellingWord (value = userData['word'] )}}
             {{cGame.points (value = userData['points']) }}
-            {{cGame.submit}}     
+            {{cGame.submit (class="btn white-text #0d47a1 blue darken-4")}}     
+            <a href="/" class="left-align btn white-text #0d47a1 blue darken-4">QUIT</a>   
             {{cGame.currentScore (value = userData['currentScore']) }}
             {{cGame.correctWords (value = userData['correctWords']) }}
             {{cGame.incorrectWords (value = userData['incorrectWords']) }}
             {{cGame.index (value = userData['currentIndex']) }} 
             {{cGame.dateTime (value = userData['startTime'])}}
         </form>
-        <a href="/" class="#2962ff blue accent-4 waves-effect waves-light btn">QUIT</a>
-            <table>
+            <table class="white-text">
                 <th>Answer</th>
                 <th>User Entered</th>
 
