@@ -5,10 +5,25 @@
 {{ super() }}
 
 {% block content %}
-    <h1>Log In Form</h1>
-    <p>to be designed by Amanda</p>
+<div class="row">
+      
+    <form class="col s12 m8 offset-m2" method="POST" action="/login">
+        {{ form.csrf_token }}
 
-    <p> Succesful Login should automatically redirect user to start game page, <br>
-    for testing purposes this is navigated through this button: </p>
-    <button><a href="/WordPage"> FOR Test </a></button>
+        <div class="input-field col s12 m8 offset-m2"> 
+          {{ form.username(size=20, class="validate") }}
+          {{ form.username.label }}
+        </div>
+
+        <div class="input-field col s12 m8 offset-m2">
+          {{ form.password(size=20, class="validate") }}
+          {{ form.password.label }}
+        </div>
+
+        <div class="input-field col s12 m8 offset-m2">
+          {{form.submit}}
+        </div> 
+    </form>
+  
+</div>
 {% endblock %}

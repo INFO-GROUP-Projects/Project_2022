@@ -3,7 +3,8 @@ var synth = window.speechSynthesis
 var voices = []
 var data
 var default_voice
-var passWord = document.getElementById("spellingWord").value
+var word = document.getElementById("spellingWord").value
+var passWord
 var index = 0
 
 function populateVoiceList(){
@@ -43,7 +44,7 @@ function populateVoiceList(){
       }
 
      function wordToSpeech(){  
-        passWord = "Spell the word     " + passWord
+        passWord = "Spell the word     " + word
         speak()
     }
 

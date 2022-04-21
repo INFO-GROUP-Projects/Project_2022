@@ -17,8 +17,9 @@ from App.controllers import (
 )
 
 from App.models import (
-    threeLetterWords,
-    fourLetterWords,
+    login,
+    SignUp,
+    LogIn
 )
 
 from App.views import (
@@ -80,11 +81,13 @@ def getAllUsers():
 
 @app.route('/login')
 def getLoginPage():
-    return render_template('login.html')
+    form = LogIn()
+    return render_template('login.html',form =form)
 
 @app.route('/signup')
 def getSignUpPage():
-    return render_template('signup.html')
+    form = SignUp()
+    return render_template('signup.html',form = form)
 
 #@app.route('/api/init')
 #def instance_words():
