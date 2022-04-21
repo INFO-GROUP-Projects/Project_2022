@@ -10,4 +10,4 @@ class currentGame(FlaskForm):
      correctWords = HiddenField('cWords')
      incorrectWords=HiddenField('iWords')
      index = HiddenField('cIndex')
-
+     dateTime = HiddenField('cDate')

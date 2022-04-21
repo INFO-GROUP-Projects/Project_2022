@@ -23,6 +23,7 @@ from App.database import init_db, get_migrate
 from App.controllers import (
     setup_jwt,
     word,
+    create_user,
     init_words
 )
 
@@ -104,6 +105,7 @@ def loginAction():
         user = validate_User(data['username'], data['password'])
         if user is None:
             flash('Invalid credentials')
+            return redirect('/login')
         else:  
             flash('Login successful')
             login_user(user,True)
@@ -113,6 +115,16 @@ def loginAction():
 def getSignUpPage():
     form = SignUp()
     return render_template('signup.html',form = form)
+
+@app.route('/signup', methods=['POST'])
+def signUpAction():
+  form = SignUp()
+  if form.validate_on_submit():
+    data = r.form 
+    create_user(data['username'],data['password'],data['email'])
+    flash('Account Created!')
+    return redirect(url_for('/login'))
+
 
 #@app.route('/api/init')
 #def instance_words():

@@ -21,11 +21,3 @@ def init_signup():
   }
   return render_template('/signup.html',test = test)
 
-@signup_views.route('/signup', methods=['POST'])
-def signUpAction():
-  form = create_form()
-  if form.validate_on_submit():
-    data = request.form 
-    create_user(data['username'],data['password'])
-    flash('Account Created!')
-    return redirect(url_for('index'))

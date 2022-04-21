@@ -25,11 +25,22 @@
             {{cGame.correctWords (value = userData['correctWords']) }}
             {{cGame.incorrectWords (value = userData['incorrectWords']) }}
             {{cGame.index (value = userData['currentIndex']) }} 
+            {{cGame.dateTime (value = userData['startTime'])}}
         </form>
         <a href="/" class="#2962ff blue accent-4 waves-effect waves-light btn">QUIT</a>
             <table>
                 <th>Answer</th>
                 <th>User Entered</th>
+
+                <tbody>
+                    {% for h in history %}
+                    <tr>
+                        <td> {{ h.answer}} </td>
+                        <td> {{ h.user_response}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
             </table>
     </div>
     <script src ="/static/VoiceBox.js"></script>

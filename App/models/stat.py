@@ -8,7 +8,7 @@ class Stat(db.Model):
     timeStarted = db.Column(db.DateTime, nullable=False)
     id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) # foreign key that links Stat to User Class
 
-    def toDict(self):
+    def to_dict(self):
         return{
             'stat_id': self.stat_id,
             'points_gained': self.points_gained,
