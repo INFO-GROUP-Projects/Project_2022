@@ -119,7 +119,7 @@ def getSignUpPage():
 def signUpAction():
   form = SignUp()
   if form.validate_on_submit():
-    data = r.form 
+    data = request.form 
     create_user(data['username'],data['password'],data['email'])
     flash('Account Created!')
     return redirect('/login')
