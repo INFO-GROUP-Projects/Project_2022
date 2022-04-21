@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}End{% endblock %}
+{% block page %}End Page{% endblock %}
+
+{{ super() }}
+
+{% block content %}
+
+<body>
+    <p> You are #N/A on the leaderboard</p>
+    <p> Your score: {{ userData['currentScore'] }}</p> 
+    <p> Your Correct Words: {{ userData['correctWords'] }} </p>
+</body>
+
+{% endblock %}

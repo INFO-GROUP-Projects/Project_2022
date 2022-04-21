@@ -123,7 +123,7 @@ def signUpAction():
     data = r.form 
     create_user(data['username'],data['password'],data['email'])
     flash('Account Created!')
-    return redirect(url_for('/login'))
+    return redirect('/login')
 
 
 #@app.route('/api/init')

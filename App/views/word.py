@@ -1,6 +1,7 @@
 
 from cmath import log
 from datetime import datetime
+from time import strptime
 from flask import Blueprint, redirect, render_template, jsonify, request, send_from_directory,flash, url_for
 from flask_login import login_required,current_user
 
@@ -55,35 +56,39 @@ def getWordsId():
 @word_views.route('/api/validate/', methods = {'POST'})
 @login_required
 def validate_word():
-    data = request.form
-    userData = {}
-    userData['currentScore'] = int(data['currentScore'])
-    userData['correctWords'] =  int(data['correctWords'])
-    userData['incorrectWords'] =  int(data['incorrectWords'])
-    userData['currentIndex'] =  int(data['index'])
-    userData['points_gained'] = int(data['points'])
-    userData["startTime"] = data['dateTime']
-    cGame = currentGame()
-    s_id = getStats_Id(current_user.id,userData["startTime"])
-    if  data['spellingWord'] == data['userWord'] :
-      flash('Correct')
-      userData['currentScore']= userData['currentScore'] + userData['points_gained']
-      userData['correctWords'] = userData['correctWords'] + 1
-      stat = updateCorrectWords(s_id,userData["startTime"],userData['points_gained'] )
+    form = currentGame()
+    if form.validate_on_submit: 
+      data = request.form
+      userData = {}
+      userData['currentScore'] = int(data['currentScore'])
+      userData['correctWords'] =  int(data['correctWords'])
+      userData['incorrectWords'] =  int(data['incorrectWords'])
+      userData['currentIndex'] =  int(data['index'])
+      userData['points_gained'] = int(data['points'])
+      userData["startTime"] = data['dateTime']
+      cGame = currentGame()
+      s_id = getStats_Id(current_user.id,userData["startTime"])
+      if  data['spellingWord'] == data['userWord'] :
+        flash('Correct')
+        userData['currentScore']= userData['currentScore'] + userData['points_gained']
+        userData['correctWords'] = userData['correctWords'] + 1
+        stat = updateCorrectWords(s_id,userData["startTime"],userData['points_gained'] )
+        
+      else:
+        flash('Incorrect')
+        userData['incorrectWords'] = userData['incorrectWords'] + 1
+        userData['currentIndex'] = userData['currentIndex'] - 1 
+        stat = updateIncorrectWords(s_id,userData["startTime"])
       
-    else:
-      flash('Incorrect')
-      userData['incorrectWords'] = userData['incorrectWords'] + 1
-      userData['currentIndex'] = userData['currentIndex'] - 1 
-      stat = updateIncorrectWords(s_id,userData["startTime"])
-    
-    create_statsDetails(s_id,data['spellingWord'],data['userWord'])
+      create_statsDetails(s_id,data['spellingWord'],data['userWord'])
 
-    if userData['currentIndex'] == 0:
-      return render_template('endGame.html', userData = userData)
+      if userData['currentIndex'] == 0:
+        return render_template('endPage.html', userData = userData)
 
-    returnVar = getWordRand()
-    userData["word"] = returnVar["word"]
-    userData["points"] = returnVar["points"]
-    history = getAllUserStatsDetails(s_id)
-    return render_template('wordPage.html',cGame = cGame , userData = userData,history = history) 
+      returnVar = getWordRand()
+      userData["word"] = returnVar["word"]
+      userData["points"] = returnVar["points"]
+      history = getAllUserStatsDetails(s_id)
+      return render_template('wordPage.html',cGame = cGame , userData = userData,history = history) 
+
+  
