@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %}Spelling Bee{% endblock %}
+{% block page %}SPELLING BEE{% endblock %}
+
+
+
+{{ super() }}
+
+
+{% block content %}
+{% if current_user.is_authenticated %}
+{% endif %}
+
+<body>
+    <table>
+    <thead>
+        <th></th> 
+        <th>Correct Answer</th> 
+        <th>User Responses</th>
+    </thead>
+    <tbody>
+        {% for h in history %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{h.answer}}</td>
+            <td>{{h.user_response}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href = "/history"> Return</a>
+</body>
+{% endblock %}

@@ -24,6 +24,13 @@ def updateIncorrectWords(stat_id,timeStarted):
     db.session.add(stat)
     db.session.commit()
 
+def getAllUserStat(id):
+    query = Stat.query.filter_by(id =  id).order_by(Stat.stat_id.desc())
+    if not query:
+        return []
+    returnStat = [q.to_dict() for q in query]
+    return returnStat
+
 def getAllStats():
     query = Stat.query.all()  
     if not query:

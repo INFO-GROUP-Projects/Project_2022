@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}Spelling Bee{% endblock %}
+{% block page %}SPELLING BEE{% endblock %}
+
+
+
+{{ super() }}
+
+
+{% block content %}
+{% if current_user.is_authenticated %}
+{% endif %}
+
+<body>
+    <table>
+    <thead>
+        <th>GameID</th>
+        <th>Score</th> 
+        <th>Correct</th>
+        <th>Incorrect</th> 
+    </thead>
+    <tbody>
+        {% for h in history %}
+        <tr>
+             <td> <a href = '/history/{{h.stat_id}}'> {{h.stat_id}} </a> </td>
+            <td>{{h.points_gained}}</td>
+            <td>{{h.correct_words}}</td>
+            <td>{{h.incorrect_words}}</td> 
+            <td>{{h.timeStarted}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+{% endblock %}

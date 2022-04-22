@@ -8,8 +8,8 @@ class StatDetails(db.Model):
 
     def to_dict(self):
         return{
+            'statDeails':self.statDetailsId,
             'stat_id': self.stat_id,
             'answer':self.answer,
-            'answer':self.answer,
-            'user_response':self.user_response,
+            'user_response':self.user_response
         }

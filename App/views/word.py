@@ -8,7 +8,7 @@ from flask_login import login_required,current_user
 from App.controllers import (
     getWordRand
 )
-from App.controllers.stats import create_stats, getAllStats, getStats_Id, updateCorrectWords,updateIncorrectWords
+from App.controllers.stats import create_stats, getAllStats, getAllUserStat, getStats_Id, updateCorrectWords,updateIncorrectWords
 from App.controllers.statsDetails import create_statsDetails, getAllUserStatsDetails
 from App.models.currentGame import currentGame
 
@@ -91,4 +91,14 @@ def validate_word():
       history = getAllUserStatsDetails(s_id)
       return render_template('wordPage.html',cGame = cGame , userData = userData,history = history) 
 
-  
+@word_views.route('/history')
+@login_required
+def returnHistoryPage():
+  query = getAllUserStat(current_user.id)
+  return render_template('history.html', history = query)
+
+@word_views.route('/history/<id>')
+@login_required
+def returnHistoryDetails(id):
+  query = getAllUserStatsDetails(id)
+  return render_template('historydetails.html', history = query)
