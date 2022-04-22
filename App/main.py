@@ -7,7 +7,7 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from datetime import timedelta
-from App.controllers.auth import login_user
+from App.controllers.auth import login_user, logout_user
 from App.controllers.user import validate_User
 
 login_manager = LoginManager()
@@ -93,6 +93,9 @@ def getAllUsers():
 
 @app.route('/login')
 def getLoginPage():
+    if current_user.is_authenticated:
+        flash('Already Logged In')
+        return redirect(url_for('word_views.returnWordPage'))
     form = LogIn()
     return render_template('login.html',form =form)
 
@@ -104,14 +107,23 @@ def loginAction():
         user = validate_User(data['username'], data['password'])
         if user is None:
             flash('Invalid credentials')
-            return redirect('/login')
+            return redirect(url_for('loginAction'))
         else:  
             flash('Login successful')
-            login_user(user,True)
-        return redirect('/WordPage')
+            login_user(user,False)
+        return redirect(url_for('word_views.returnWordPage'))
+
+@app.route('/logout')
+def logoutActions():
+    logout_user()
+    flash('Logged Out')
+    return redirect(url_for('api_views.get_api_docs'))
 
 @app.route('/signup')
 def getSignUpPage():
+    if current_user.is_authenticated:
+        flash('You cannot create an account while logged in please log out first')
+        return redirect(url_for('word_views.returnWordPage'))
     form = SignUp()
     return render_template('signup.html',form = form)
 
@@ -120,9 +132,13 @@ def signUpAction():
   form = SignUp()
   if form.validate_on_submit():
     data = request.form 
-    create_user(data['username'],data['password'],data['email'])
-    flash('Account Created!')
-    return redirect('/login')
+    msg = create_user(data['username'],data['password'],data['email'])
+    if msg == "Error":
+        flash('Error in creating account')
+        return redirect(url_for('getSignUpPage'))
+    else:
+        flash('Account Created!')
+    return redirect(url_for('loginAction'))
 
 
 #@app.route('/api/init')

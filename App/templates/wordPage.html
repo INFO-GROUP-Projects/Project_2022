@@ -24,7 +24,7 @@
 
         <p class="center white-text"> Click the Game Master to play the word</p>
         <form method="POST" action ="/api/validate" class = "card grey lighten-3" >
-            {{cGame.userWord}}
+            {{cGame.userWord (value = "")}}
             {{cGame.spellingWord (value = userData['word'] )}}
             {{cGame.points (value = userData['points']) }}
             {{cGame.submit (class="btn white-text #0d47a1 blue darken-4")}}     
