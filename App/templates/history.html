@@ -17,7 +17,7 @@
         <th>GameID</th>
         <th>Score</th> 
         <th>Correct</th>
-        <th>Incorrect</th> 
+        <th>Incorrect</th>
     </thead>
     <tbody>
         {% for h in history %}
@@ -26,7 +26,6 @@
             <td>{{h.points_gained}}</td>
             <td>{{h.correct_words}}</td>
             <td>{{h.incorrect_words}}</td> 
-            <td>{{h.timeStarted}}</td>
         </tr>
         {% endfor %}
     </tbody>
