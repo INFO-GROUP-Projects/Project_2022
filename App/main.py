@@ -112,7 +112,8 @@ def loginAction():
             flash('Login successful')
             login_user(user,False)
             return redirect(url_for('word_views.returnWordPage'))
-
+    else:
+        flash('Form Error')
     flash('Invalid credentials')
     return redirect(url_for('loginAction'))
 
