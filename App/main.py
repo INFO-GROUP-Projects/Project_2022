@@ -113,6 +113,9 @@ def loginAction():
             flash('Login successful')
             login_user(user,False)
         return redirect(url_for('word_views.returnWordPage'))
+    flash('Invalid credentials')
+    return redirect(url_for('loginAction'))
+
 
 @app.route('/logout')
 def logoutActions():
