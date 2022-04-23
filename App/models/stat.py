@@ -17,7 +17,7 @@ class Stat(db.Model):
             'incorrect_words': self.incorrect_words,
             'timeStarted':self.timeStarted,
             'user': self.user.toDict(),
-            'gamamaster': self.gamamaster
+            'gamemaster': self.gamemaster
         }
    
     
