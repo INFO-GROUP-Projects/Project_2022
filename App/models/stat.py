@@ -6,6 +6,7 @@ class Stat(db.Model):
     correct_words = db.Column(db.Integer, nullable=False)
     incorrect_words = db.Column(db.Integer, nullable=False)
     timeStarted = db.Column(db.DateTime, nullable=False)
+    gamemaster = db.Column(db.Gamemaster, nullable = False)
     id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) # foreign key that links Stat to User Class
     user = db.relationship('User')
 
@@ -16,7 +17,8 @@ class Stat(db.Model):
             'correct_words': self.correct_words,
             'incorrect_words': self.incorrect_words,
             'timeStarted':self.timeStarted,
-            'user': self.user.toDict()
+            'user': self.user.toDict(),
+            'gamemaster': self.gamemaster
         }
    
     

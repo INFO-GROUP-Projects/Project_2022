@@ -28,7 +28,7 @@ def init_wordPage():
     "gamemaster": gameStr
   }
 
-  uStat = create_stats(userData['currentScore'],userData['correctWords'],userData['incorrectWords'],current_user.id ,userData['startTime'])
+  uStat = create_stats(userData['currentScore'],userData['correctWords'],userData['incorrectWords'],current_user.id ,userData['startTime'], userData['gamemaster'])
   return render_template('wordPageBegin.html',  userStats = userStats, userData = userData )
 
 @word_views.route('/WordPage', methods={'POST'})
@@ -41,10 +41,11 @@ def returnWordPage():
   userData['incorrectWords'] = data['incorrectWords']
   userData ['currentIndex'] = data['index']
   userData["startTime"] = data['dateTime']
+  userData['gamemaster'] = data["gamemaster"]
   returnVar = getWordRand()
   userData["word"] = returnVar["word"]
   userData["points"] = returnVar["points"]
-  userData['gamemaster'] = data["gamemaster"]
+  
   cGame = currentGame()
   return render_template('wordPage.html',cGame = cGame , userData = userData)  
 
