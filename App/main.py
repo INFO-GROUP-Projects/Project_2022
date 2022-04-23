@@ -106,13 +106,12 @@ def loginAction():
     if form.validate_on_submit():
         data = request.form
         user = validate_User(data['username'], data['password'])
-        if user is None:
-            flash('Invalid credentials')
-            return redirect(url_for('loginAction'))
-        else:  
+
+        if user is not None:  
             flash('Login successful')
             login_user(user,False)
-        return redirect(url_for('word_views.returnWordPage'))
+            return redirect(url_for('word_views.returnWordPage'))
+
     flash('Invalid credentials')
     return redirect(url_for('loginAction'))
 
