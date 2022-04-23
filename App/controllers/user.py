@@ -29,7 +29,8 @@ def get_all_users_json():
     return users
 
 def validate_User(username, password):
-    user = User.query.filter_by(username = username).first()
-    if user and user.check_password(password):
-        return user
+    user = User.query.filter_by(username = username).all()
+    for u in user:
+        if u and u.check_password(password):
+            return u
     return None

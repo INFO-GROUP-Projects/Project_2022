@@ -136,15 +136,19 @@ def getSignUpPage():
 
 @app.route('/signup', methods=['POST'])
 def signUpAction():
-  form = SignUp()
-  if form.validate_on_submit():
-    data = request.form 
-    msg = create_user(data['username'],data['password'],data['email'])
-    if msg == "Error":
-        flash('Error in creating account')
-        return redirect(url_for('getSignUpPage'))
+    form = SignUp()
+    if form.validate_on_submit():
+        data = request.form 
+        msg = create_user(data['username'],data['password'],data['email'])
+        if msg == "Error":
+            flash('Error in creating account')
+            return redirect(url_for('getSignUpPage'))
+        else:
+            flash('Account Created!')
     else:
-        flash('Account Created!')
+        print(form.errors)
+        flash('Form Error')
+        return redirect(url_for('getSignUpPage'))
     return redirect(url_for('loginAction'))
 
 
