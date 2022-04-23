@@ -20,7 +20,10 @@
            <h3  class = "col s6 white-text"> Hearts: {{userData['currentIndex']}} /3 </h3> 
         </div>
         
-        <img src="{{url_for('static', filename = 'images/gamemaster.PNG')}}" alt="gamemaster" height="400" class="responsive-img center" onclick="wordToSpeech()"/>
+        <div>
+            <img src="{{url_for('static', filename = 'images/' + userData['gamemaster'])}}" alt="gamemaster" height="400" class="responsive-img center" onclick="wordToSpeech()"/>
+        </div>
+        
 
         <p class="center white-text"> Click the Game Master to play the word</p>
         <form method="POST" action ="/api/validate" class = "card grey lighten-3" >

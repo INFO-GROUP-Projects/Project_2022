@@ -20,12 +20,14 @@ word_views = Blueprint('word_views', __name__, template_folder='../templates')
 def init_wordPage():
   userStats = currentGame()
   toStringDate = str(datetime.now())
+  gameStr = 'gamemaster.PNG'
   userData = {
     "currentScore": 0,
     "correctWords": 0,
     "incorrectWords":0,
     "currentIndex": 3,
     "startTime": toStringDate
+    "filename": gameStr
   }
 
   uStat = create_stats(userData['currentScore'],userData['correctWords'],userData['incorrectWords'],current_user.id ,userData['startTime'])
@@ -44,6 +46,7 @@ def returnWordPage():
   returnVar = getWordRand()
   userData["word"] = returnVar["word"]
   userData["points"] = returnVar["points"]
+  userData['gamemaster'] = 'gamemaster.PNG'
   
   cGame = currentGame()
   
@@ -67,6 +70,7 @@ def validate_word():
       userData['currentIndex'] =  int(data['index'])
       userData['points_gained'] = int(data['points'])
       userData["startTime"] = data['dateTime']
+      userData['gamemaster'] = 'gamemaster.PNG'
       cGame = currentGame()
       s_id = getStats_Id(current_user.id,userData["startTime"])
       if  data['spellingWord'] == data['userWord'] :
@@ -74,13 +78,14 @@ def validate_word():
         userData['currentScore']= userData['currentScore'] + userData['points_gained']
         userData['correctWords'] = userData['correctWords'] + 1
         stat = updateCorrectWords(s_id,userData["startTime"],userData['points_gained'] )
-        
+        userData['gamemaster'] = 'correct.PNG'
       else:
         flash('Incorrect')
         userData['incorrectWords'] = userData['incorrectWords'] + 1
         userData['currentIndex'] = userData['currentIndex'] - 1 
         stat = updateIncorrectWords(s_id,userData["startTime"])
-      
+        userData['gamemaster'] = 'gamemaster.PNG'
+
       create_statsDetails(s_id,data['spellingWord'],data['userWord'])
 
       if userData['currentIndex'] == 0:
