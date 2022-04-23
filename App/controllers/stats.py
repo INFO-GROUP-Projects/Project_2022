@@ -24,12 +24,28 @@ def updateIncorrectWords(stat_id,timeStarted):
     db.session.add(stat)
     db.session.commit()
 
-def getAllUserStat(id):
-    query = Stat.query.filter_by(id =  id).order_by(Stat.stat_id.desc())
+def getPostion(points_gained):
+    query = Stat.query.filter_by().order_by(Stat.points_gained.desc())
+    if not query:
+        return []
+    returnStat = [q.to_dict() for q in query]
+
+    for num, r in enumerate(returnStat, start = 1):
+        if(r["points_gained"] <= points_gained):
+            return num
+    return len(returnStat)
+
+def getAllUserStat(id,page):
+    page = (int(page) -1) * 10
+    query = Stat.query.filter_by(id =  id).order_by(Stat.stat_id.desc()).offset(page).limit(10)
     if not query:
         return []
     returnStat = [q.to_dict() for q in query]
     return returnStat
+
+def countUserStats(id):
+    num = Stat.query.filter_by(id = id).count()
+    return num
 
 def getAllStats():
     query = Stat.query.all()  
@@ -39,7 +55,7 @@ def getAllStats():
     return returnStat
 
 def getTopTenStats():
-    query = Stat.query.order_by("points_gained desc").limit(10)  
+    query = Stat.query.filter_by().order_by(Stat.points_gained.desc()).limit(10)  
     if not query:
         return []
     returnStat = [q.to_dict() for q in query]

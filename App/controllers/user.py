@@ -1,6 +1,3 @@
-import sqlalchemy
-
-
 from sqlalchemy.exc import IntegrityError
 from App.models import User
 from App.database import db
@@ -18,6 +15,11 @@ def create_user(username, password,email):
     except IntegrityError :
         db.session.rollback()
         return "Error"
+def getUser(id):
+    user = User.query.filter_by(id = id).first()
+    if not user:
+        return []
+    return user.toDict()
 
 def get_all_users_json():
     users = User.query.all()

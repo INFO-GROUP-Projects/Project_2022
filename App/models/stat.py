@@ -7,6 +7,7 @@ class Stat(db.Model):
     incorrect_words = db.Column(db.Integer, nullable=False)
     timeStarted = db.Column(db.DateTime, nullable=False)
     id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) # foreign key that links Stat to User Class
+    user = db.relationship('User')
 
     def to_dict(self):
         return{
@@ -15,5 +16,7 @@ class Stat(db.Model):
             'correct_words': self.correct_words,
             'incorrect_words': self.incorrect_words,
             'timeStarted':self.timeStarted,
-            'id': self.id
+            'user': self.user.toDict()
         }
+   
+    

@@ -7,9 +7,36 @@
 {% block content %}
 
 <body>
-    <p> You are #N/A on the leaderboard</p>
-    <p> Your score: {{ userData['currentScore'] }}</p> 
-    <p> Your Correct Words: {{ userData['correctWords'] }} </p>
+    <div class = "container">
+        <h5>Postion: # {{ position}} </h5>
+        <h5> Your score: {{ userData['currentScore'] }}</h5> 
+        <h5> Words Correct: {{ userData['correctWords'] }} </h5>
+        <a href="/" class="center-align waves-effect waves-light btn-large white-text blue darken-4"> Play Again? </a>
+        <a href="/history/1" class="center-align waves-effect waves-light btn-large white-text blue darken-4"> History </a>
+        <a href="/logout" class="center-align waves-effect waves-light btn-large white-text blue darken-4"> Logout</a>
+    </div>
+   
+    <div class ="container">
+        <h4 class = "center-align">Leaderboard</h4>
+    <table>
+        <thead>
+            <th></th>
+            <th>Username</th>
+            <th>Score</th>
+        </thead>
+        <tbody>
+            {% for l in leaderboard%}
+            <tr>
+                <td># {{loop.index}}</td>
+                <td>{{l.user.username}}</td>
+                <td>{{l.points_gained}}</td>
+            </tr> 
+            {% endfor %}
+       </tbody>     
+    </table>
+   
 </body>
+    </div>
+    
 
 {% endblock %}

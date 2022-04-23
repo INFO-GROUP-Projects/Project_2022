@@ -1,6 +1,7 @@
 
 from cmath import log
 from datetime import datetime
+from math import ceil
 from time import strptime
 from flask import Blueprint, redirect, render_template, jsonify, request, send_from_directory,flash, url_for
 from flask_login import login_required,current_user
@@ -8,7 +9,7 @@ from flask_login import login_required,current_user
 from App.controllers import (
     getWordRand
 )
-from App.controllers.stats import create_stats, getAllStats, getAllUserStat, getStats_Id, updateCorrectWords,updateIncorrectWords
+from App.controllers.stats import countUserStats, create_stats, getAllStats, getAllUserStat, getPostion, getStats_Id, getTopTenStats, updateCorrectWords,updateIncorrectWords
 from App.controllers.statsDetails import create_statsDetails, getAllUserStatsDetails
 from App.models.currentGame import currentGame
 
@@ -83,21 +84,35 @@ def validate_word():
       create_statsDetails(s_id,data['spellingWord'],data['userWord'])
 
       if userData['currentIndex'] == 0:
-        return render_template('endPage.html', userData = userData)
+        leaderboard = getTopTenStats()
+        position = getPostion(userData['currentScore'])
+        return render_template('endPage.html', userData = userData, leaderboard = leaderboard, position = position)
 
       returnVar = getWordRand()
       userData["word"] = returnVar["word"]
       userData["points"] = returnVar["points"]
       history = getAllUserStatsDetails(s_id)
+
       return render_template('wordPage.html',cGame = cGame , userData = userData,history = history) 
 
-@word_views.route('/history')
+@word_views.route('/history/<page>/')
 @login_required
-def returnHistoryPage():
-  query = getAllUserStat(current_user.id)
-  return render_template('history.html', history = query)
+def returnHistoryPage(page):
+  query = getAllUserStat(current_user.id,page)
+  count = countUserStats(current_user.id)
+  if(int(page) == 1):
+    prev = 1
+  else:
+    prev = int(page) - 1
+  if(int(page) >= ceil(count/10)):
+    next = int(page) 
+    flash("No more records")
+  else:
+    next = int(page) + 1
+   
+  return render_template('history.html', history = query, next = next, prev = prev)
 
-@word_views.route('/history/<id>')
+@word_views.route('/history/<page>/<id>')
 @login_required
 def returnHistoryDetails(id):
   query = getAllUserStatsDetails(id)

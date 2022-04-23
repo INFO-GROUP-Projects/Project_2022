@@ -26,10 +26,14 @@
             <td>{{h.points_gained}}</td>
             <td>{{h.correct_words}}</td>
             <td>{{h.incorrect_words}}</td> 
+            <td>{{h.uname}}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-<a href = "/">Return</a>
+<a href = "/" class="center-align waves-effect waves-light btn-large white-text blue darken-4">Return</a>
+<a href = "/history/{{prev}}" id= "prev" class="center-align waves-effect waves-light btn-large white-text blue darken-4">Previous Page </a>
+<a href = "/history/{{next}}" id = "next"class="center-align waves-effect waves-light btn-large white-text blue darken-4"> Next Page</a>
 </body>
+
 {% endblock %}
