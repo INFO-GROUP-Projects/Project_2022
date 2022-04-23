@@ -30,7 +30,7 @@ def init_wordPage():
     "gamemaster": gameStr
   }
 
-  uStat = create_stats(userData['currentScore'],userData['correctWords'],userData['incorrectWords'],current_user.id ,userData['startTime'])
+  uStat = create_stats(userData['currentScore'],userData['correctWords'],userData['incorrectWords'],current_user.id ,userData['startTime'], userData['gamemaster'])
   return render_template('wordPageBegin.html',  userStats = userStats, userData = userData )
 
 @word_views.route('/WordPage', methods={'POST'})
