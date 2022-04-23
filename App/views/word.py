@@ -43,10 +43,10 @@ def returnWordPage():
   userData['incorrectWords'] = data['incorrectWords']
   userData ['currentIndex'] = data['index']
   userData["startTime"] = data['dateTime']
+  userData['gamemaster'] = data["gamemaster"]
   returnVar = getWordRand()
   userData["word"] = returnVar["word"]
   userData["points"] = returnVar["points"]
-  userData['gamemaster'] = data["gamemaster"]
   
   cGame = currentGame()
   
