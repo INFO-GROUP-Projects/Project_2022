@@ -44,7 +44,7 @@ def returnWordPage():
   userData["points"] = returnVar["points"]
   gameMaster = False
   cGame = currentGame()
-  uStat = create_stats(userData['currentScore'],userData['correctWords'],userData['incorrectWords'],current_user.id ,userData['startTime']))
+  uStat = create_stats(userData['currentScore'],userData['correctWords'],userData['incorrectWords'],current_user.id ,userData['startTime'])
   return render_template('wordPage.html',cGame = cGame , userData = userData, gameMaster = gameMaster)  
 
 @word_views.route('/api/getWord/', methods = {'GET'})
