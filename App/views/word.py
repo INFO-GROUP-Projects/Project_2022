@@ -18,18 +18,17 @@ word_views = Blueprint('word_views', __name__, template_folder='../templates')
 def init_wordPage():
   userStats = currentGame()
   toStringDate = str(datetime.now())
-# gameStr = 'gamemaster.PNG'
   userData = {
     "currentScore": 0,
     "correctWords": 0,
     "incorrectWords":0,
     "currentIndex": 3,
     "startTime": toStringDate,
-    # "gamemaster": gameStr
   }
+  gameMaster = False;
 
   uStat = create_stats(userData['currentScore'],userData['correctWords'],userData['incorrectWords'],current_user.id ,userData['startTime'])#, userData['gamemaster'])
-  return render_template('wordPageBegin.html',  userStats = userStats, userData = userData )
+  return render_template('wordPageBegin.html',  userStats = userStats, userData = userData , gameMaster = gameMaster)
 
 @word_views.route('/WordPage', methods={'POST'})
 @login_required
@@ -41,13 +40,12 @@ def returnWordPage():
   userData['incorrectWords'] = data['incorrectWords']
   userData ['currentIndex'] = data['index']
   userData["startTime"] = data['dateTime']
-  # userData['gamemaster'] = data["gamemaster"]
   returnVar = getWordRand()
   userData["word"] = returnVar["word"]
   userData["points"] = returnVar["points"]
-  
+  gameMaster = False
   cGame = currentGame()
-  return render_template('wordPage.html',cGame = cGame , userData = userData)  
+  return render_template('wordPage.html',cGame = cGame , userData = userData, gameMaster = gameMaster)  
 
 @word_views.route('/api/getWord/', methods = {'GET'})
 @login_required
@@ -67,8 +65,7 @@ def validate_word():
       userData['currentIndex'] =  int(data['index'])
       userData['points_gained'] = int(data['points'])
       userData["startTime"] = data['dateTime']
-      response = 0
-      # userData['gamemaster'] = data["gamemaster"]
+      gameMaster = False
       cGame = currentGame()
       s_id = getStats_Id(current_user.id,userData["startTime"])
       if  data['spellingWord'] == data['userWord'] :
@@ -76,15 +73,12 @@ def validate_word():
         userData['currentScore']= userData['currentScore'] + userData['points_gained']
         userData['correctWords'] = userData['correctWords'] + 1
         stat = updateCorrectWords(s_id,userData["startTime"],userData['points_gained'] )
-        # userData['gamemaster'] = "correct.PNG"
-        response = 1
+        gameMaster = True
       else:
         flash('Incorrect')
         userData['incorrectWords'] = userData['incorrectWords'] + 1
         userData['currentIndex'] = userData['currentIndex'] - 1 
         stat = updateIncorrectWords(s_id,userData["startTime"])
-        # userData['gamemaster'] = userData['gamemaster'] 
-        response = 0
 
       create_statsDetails(s_id,data['spellingWord'],data['userWord'])
 
@@ -98,7 +92,7 @@ def validate_word():
       userData["points"] = returnVar["points"]
       history = getAllUserStatsDetails(s_id)
 
-      return render_template('wordPage.html',cGame = cGame , userData = userData,history = history) 
+      return render_template('wordPage.html',cGame = cGame , userData = userData,history = history, gameMaster = gameMaster) 
 
 @word_views.route('/history/<page>/')
 @login_required
