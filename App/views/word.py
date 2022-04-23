@@ -1,15 +1,13 @@
 
-from cmath import log
 from datetime import datetime
 from math import ceil
-from time import strptime
 from flask import Blueprint, redirect, render_template, jsonify, request, send_from_directory,flash, url_for
 from flask_login import login_required,current_user
 
 from App.controllers import (
     getWordRand
 )
-from App.controllers.stats import countUserStats, create_stats, getAllStats, getAllUserStat, getPostion, getStats_Id, getTopTenStats, updateCorrectWords,updateIncorrectWords
+from App.controllers.stats import countUserStats, create_stats, getAllUserStat, getPostion, getStats_Id, getTopTenStats, updateCorrectWords,updateIncorrectWords
 from App.controllers.statsDetails import create_statsDetails, getAllUserStatsDetails
 from App.models.currentGame import currentGame
 
@@ -47,9 +45,7 @@ def returnWordPage():
   userData["word"] = returnVar["word"]
   userData["points"] = returnVar["points"]
   userData['gamemaster'] = data["gamemaster"]
-  
   cGame = currentGame()
-  
   return render_template('wordPage.html',cGame = cGame , userData = userData)  
 
 @word_views.route('/api/getWord/', methods = {'GET'})
