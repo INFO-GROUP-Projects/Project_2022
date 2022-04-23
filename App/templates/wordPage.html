@@ -22,9 +22,9 @@
         
         <div>
             {% if gameMaster %} 
-                <img src="{{ url_for('static', filename = 'images/correct.PNG') }}" alt="gamemaster" height="400" class="responsive-img center" onclick="wordToSpeech()"/>
+                <img src="{{ url_for('static', filename = 'images/correct.PNG') }}" alt="gamemaster" height="400" class="responsive-img center" id ="gamemaster"/>
             {% else %} 
-                <img src="{{ url_for('static', filename = 'images/gamemaster.PNG') }}" alt="gamemaster" height="400" class="responsive-img center" onclick="wordToSpeech()"/>
+                <img src="{{ url_for('static', filename = 'images/gamemaster.PNG') }}" alt="gamemaster" height="400" class="responsive-img center" id ="gamemaster"/>
             {% endif %}
         </div>
 

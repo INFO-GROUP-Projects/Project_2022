@@ -7,6 +7,10 @@ var word = document.getElementById("spellingWord").value
 var passWord
 var index = 0
 
+window.addEventListener("DOMContentLoaded", function(event){
+    document.getElementById("gamemaster").addEventListener("click",wordToSpeech)
+    console.log("okay")
+})
 function populateVoiceList(){
     voices = synth.getVoices().sort(function (a, b){
         const aname = a.name.toUpperCase(), bname = b.name.toUpperCase();
