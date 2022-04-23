@@ -106,7 +106,8 @@ def loginAction():
     if form.validate_on_submit():
         data = request.form
         user = validate_User(data['username'], data['password'])
-
+        print(data)
+        print(user)
         if user is not None:  
             flash('Login successful')
             login_user(user,False)
