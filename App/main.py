@@ -98,6 +98,7 @@ def getLoginPage():
         flash('Already Logged In')
         return redirect(url_for('word_views.returnWordPage'))
     form = LogIn()
+    form._csrf.generate_csrf_token(form.csrf_token)
     return render_template('login.html',form =form)
 
 @app.route('/login', methods = {'POST'})
@@ -106,15 +107,13 @@ def loginAction():
     if form.validate_on_submit():
         data = request.form
         user = validate_User(data['username'], data['password'])
-        print(data)
-        print(user)
         if user is not None:  
             flash('Login successful')
             login_user(user,False)
             return redirect(url_for('word_views.returnWordPage'))
     else:
         print(form.errors)
-        flash('Form Error')
+        flash('CSRF-Token Error')
         return redirect(url_for('loginAction'))
     flash('Invalid credentials')
     return redirect(url_for('loginAction'))
@@ -132,6 +131,7 @@ def getSignUpPage():
         flash('You cannot create an account while logged in please log out first')
         return redirect(url_for('word_views.returnWordPage'))
     form = SignUp()
+    form._csrf.generate_csrf_token(form.csrf_token)
     return render_template('signup.html',form = form)
 
 @app.route('/signup', methods=['POST'])
