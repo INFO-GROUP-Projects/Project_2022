@@ -21,7 +21,11 @@
         </div>
         
         <div>
-            <img src="{{url_for('static', filename = ('images/' + userData['gamemaster']))}}" alt="gamemaster" height="400" class="responsive-img center" onclick="wordToSpeech()"/>
+            {% if response = 0 } 
+            <img src="{{url_for('static', filename = images/gamemaster.PNG }}" alt="gamemaster" height="400" class="responsive-img center" onclick="wordToSpeech()"/>
+            {%else%} 
+            <img src="{{url_for('static', filename = images/correct.PNG }}" alt="gamemaster" height="400" class="responsive-img center" onclick="wordToSpeech()"/> {%endif%}
+            
         </div>
         
 
@@ -37,7 +41,7 @@
             {{cGame.incorrectWords (value = userData['incorrectWords']) }}
             {{cGame.index (value = userData['currentIndex']) }} 
             {{cGame.dateTime (value = userData['startTime'])}}
-            {{cGame.gamemaster (value = userData['gamemaster'])}}
+            <!-- {{cGame.gamemaster (value = userData['gamemaster'])}} -->
         </form>
             <table class="white-text">
                 <th>Answer</th>

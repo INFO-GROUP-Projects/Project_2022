@@ -2,8 +2,8 @@
 from App.models.stat import Stat
 from App.database import db
 
-def create_stats(p_gain, c_words, i_words, u_id,time, gm):
-    newStat = Stat(points_gained = p_gain,correct_words = c_words,incorrect_words = i_words,id = u_id,timeStarted = time, gamemaster = gm)
+def create_stats(p_gain, c_words, i_words, u_id,time):#, gm):
+    newStat = Stat(points_gained = p_gain,correct_words = c_words,incorrect_words = i_words,id = u_id,timeStarted = time)#, gamemaster = gm)
     db.session.add(newStat)
     db.session.commit()
 
