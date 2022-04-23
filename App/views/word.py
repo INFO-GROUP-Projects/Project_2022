@@ -27,7 +27,6 @@ def init_wordPage():
   }
   gameMaster = False;
 
-  uStat = create_stats(userData['currentScore'],userData['correctWords'],userData['incorrectWords'],current_user.id ,userData['startTime'])#, userData['gamemaster'])
   return render_template('wordPageBegin.html',  userStats = userStats, userData = userData , gameMaster = gameMaster)
 
 @word_views.route('/WordPage', methods={'POST'})
@@ -45,6 +44,7 @@ def returnWordPage():
   userData["points"] = returnVar["points"]
   gameMaster = False
   cGame = currentGame()
+  uStat = create_stats(userData['currentScore'],userData['correctWords'],userData['incorrectWords'],current_user.id ,userData['startTime']))
   return render_template('wordPage.html',cGame = cGame , userData = userData, gameMaster = gameMaster)  
 
 @word_views.route('/api/getWord/', methods = {'GET'})
@@ -113,6 +113,6 @@ def returnHistoryPage(page):
 
 @word_views.route('/history/<page>/<id>')
 @login_required
-def returnHistoryDetails(id):
+def returnHistoryDetails(page,id):
   query = getAllUserStatsDetails(id)
-  return render_template('historydetails.html', history = query)
+  return render_template('historydetails.html', history = query, page = page)

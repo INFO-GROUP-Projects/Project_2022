@@ -22,7 +22,7 @@
     <tbody>
         {% for h in history %}
         <tr>
-             <td> <a href = '/history/{{h.stat_id}}'> {{h.stat_id}} </a> </td>
+             <td> <a href = '/history/{{next}}/{{h.stat_id}}'> {{h.stat_id}} </a> </td>
             <td>{{h.points_gained}}</td>
             <td>{{h.correct_words}}</td>
             <td>{{h.incorrect_words}}</td> 
