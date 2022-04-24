@@ -4,6 +4,7 @@ from flask import Flask, jsonify,flash,redirect, render_template, url_for,reques
 from flask_login import LoginManager, current_user
 from flask_uploads import DOCUMENTS, IMAGES, TEXT, UploadSet, configure_uploads
 from flask_cors import CORS
+from flask_wtf.csrf import CSRFProtect 
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from datetime import timedelta
@@ -11,6 +12,7 @@ from App.controllers.auth import login_user, logout_user
 from App.controllers.user import validate_User
 
 login_manager = LoginManager()
+csrf = CSRFProtect()
 
 login_manager = LoginManager()
 @login_manager.user_loader
@@ -78,6 +80,7 @@ def create_app(config={}):
     init_db(app)
     setup_jwt(app)
     login_manager.init_app(app)
+    csrf.init_app(app)
     app.app_context().push()
     return app
 
@@ -98,7 +101,6 @@ def getLoginPage():
         flash('Already Logged In')
         return redirect(url_for('word_views.returnWordPage'))
     form = LogIn()
-    form._csrf.generate_csrf_token(form.csrf_token)
     return render_template('login.html',form =form)
 
 @app.route('/login', methods = {'POST'})
@@ -109,7 +111,7 @@ def loginAction():
         user = validate_User(data['username'], data['password'])
         if user is not None:  
             flash('Login successful')
-            login_user(user,False)
+            login_user(user,True)
             return redirect(url_for('word_views.returnWordPage'))
     else:
         print(form.errors)
@@ -131,7 +133,6 @@ def getSignUpPage():
         flash('You cannot create an account while logged in please log out first')
         return redirect(url_for('word_views.returnWordPage'))
     form = SignUp()
-    form._csrf.generate_csrf_token(form.csrf_token)
     return render_template('signup.html',form = form)
 
 @app.route('/signup', methods=['POST'])
