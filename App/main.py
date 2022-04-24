@@ -103,17 +103,13 @@ def getLoginPage():
 @app.route('/login', methods = {'POST'})
 def loginAction():
     form = LogIn()
-    if form.validate_on_submit():
-        data = request.form
-        user = validate_User(data['username'], data['password'])
-        if user is not None:  
-            flash('Login successful')
-            login_user(user,True)
-            return redirect(url_for('word_views.returnWordPage'))
-    else:
-        print(form.errors)
-        flash('CSRF-Token Error')
-        return redirect(url_for('loginAction'))
+    data = request.form
+    user = validate_User(data['username'], data['password'])
+    if user is not None:  
+        flash('Login successful')
+        login_user(user,True)
+        return redirect(url_for('word_views.returnWordPage'))
+    
     flash('Invalid credentials')
     return redirect(url_for('loginAction'))
 
@@ -135,18 +131,13 @@ def getSignUpPage():
 @app.route('/signup', methods=['POST'])
 def signUpAction():
     form = SignUp()
-    if form.validate_on_submit():
-        data = request.form 
-        msg = create_user(data['username'],data['password'],data['email'])
-        if msg == "Error":
-            flash('Error in creating account')
-            return redirect(url_for('getSignUpPage'))
-        else:
-            flash('Account Created!')
-    else:
-        print(form.errors)
-        flash('Form Error')
+    data = request.form 
+    msg = create_user(data['username'],data['password'],data['email'])
+    if msg == "Error":
+        flash('Error in creating account')
         return redirect(url_for('getSignUpPage'))
+    else:
+        flash('Account Created!')
     return redirect(url_for('loginAction'))
 
 
