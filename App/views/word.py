@@ -68,7 +68,7 @@ def validate_word():
       gameMaster = False
       cGame = currentGame()
       s_id = getStats_Id(current_user.id,userData["startTime"])
-      if  data['spellingWord'] == data['userWord'] :
+      if  data['spellingWord'] == str.lower(data['userWord']) :
         flash('Correct')
         userData['currentScore']= userData['currentScore'] + userData['points_gained']
         userData['correctWords'] = userData['correctWords'] + 1
